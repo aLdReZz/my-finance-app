@@ -550,18 +550,25 @@ const App = () => {
           marginBottom: '1rem'
         }}>
           <h2 style={{ fontSize: '1.25rem', fontWeight: '700', color: THEME.text, letterSpacing: '-0.01em', flexShrink: 0 }}>Upcoming Dues</h2>
-          <div style={{ display: 'flex', gap: '0.375rem', flexShrink: 0 }}>
+          <div style={{
+            display: 'flex',
+            gap: '0.25rem',
+            flexShrink: 0,
+            backgroundColor: 'rgba(255, 255, 255, 0.05)',
+            borderRadius: '0.5rem',
+            padding: '0.25rem'
+          }}>
             {['Monthly', 'Weekly', 'Daily'].map(filter => (
               <button
                 key={filter}
                 onClick={() => setDuesFilter(filter)}
                 style={{
                   padding: '0.375rem 0.75rem',
-                  borderRadius: '0.5rem',
+                  borderRadius: '0.375rem',
                   fontSize: '0.7rem',
                   fontWeight: '600',
-                  backgroundColor: duesFilter === filter ? '#7c3aed' : 'rgba(124, 58, 237, 0.15)',
-                  color: duesFilter === filter ? 'white' : '#a78bfa',
+                  backgroundColor: duesFilter === filter ? '#7c3aed' : 'transparent',
+                  color: duesFilter === filter ? 'white' : '#9ca3af',
                   border: 'none',
                   cursor: 'pointer',
                   transition: 'all 0.2s ease',
