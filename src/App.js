@@ -521,13 +521,13 @@ const App = () => {
 
       {/* Upcoming Dues Section */}
       <div style={{ marginBottom: '1rem' }}>
-        <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: '1rem', flexWrap: 'wrap', gap: '0.5rem' }}>
-          <h2 style={{ fontSize: '1.25rem', fontWeight: '800', color: THEME.text, letterSpacing: '-0.02em' }}>Upcoming Dues</h2>
-          <div style={{ display: 'flex', gap: '0.375rem' }}>
+        <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: '1rem', gap: '0.5rem' }}>
+          <h2 style={{ fontSize: '1.125rem', fontWeight: '800', color: THEME.text, letterSpacing: '-0.02em', flexShrink: 0 }}>Upcoming Dues</h2>
+          <div style={{ display: 'flex', gap: '0.25rem', flexShrink: 0 }}>
             <button style={{
-              padding: '0.375rem 0.75rem',
-              borderRadius: '0.5rem',
-              fontSize: '0.7rem',
+              padding: '0.35rem 0.6rem',
+              borderRadius: '0.4rem',
+              fontSize: '0.65rem',
               fontWeight: '600',
               backgroundColor: '#6366f1',
               color: 'white',
@@ -536,9 +536,9 @@ const App = () => {
               ...MOBILE_TOUCH
             }}>Monthly</button>
             <button style={{
-              padding: '0.375rem 0.75rem',
-              borderRadius: '0.5rem',
-              fontSize: '0.7rem',
+              padding: '0.35rem 0.6rem',
+              borderRadius: '0.4rem',
+              fontSize: '0.65rem',
               fontWeight: '500',
               backgroundColor: 'transparent',
               color: '#9ca3af',
@@ -547,9 +547,9 @@ const App = () => {
               ...MOBILE_TOUCH
             }}>Weekly</button>
             <button style={{
-              padding: '0.375rem 0.75rem',
-              borderRadius: '0.5rem',
-              fontSize: '0.7rem',
+              padding: '0.35rem 0.6rem',
+              borderRadius: '0.4rem',
+              fontSize: '0.65rem',
               fontWeight: '500',
               backgroundColor: 'transparent',
               color: '#9ca3af',
