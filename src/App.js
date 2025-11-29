@@ -126,6 +126,7 @@ const App = () => {
 
   const [activeView, setActiveView] = useState('Home');
   const [reportView, setReportView] = useState('Monthly');
+  const [duesFilter, setDuesFilter] = useState('Monthly');
 
   // Firebase Initialization
   useEffect(() => {
@@ -333,9 +334,17 @@ const App = () => {
     return totalExpense / Math.max(1, expenses.length);
   }, [expenses]);
 
+  // Filter recurring templates based on duesFilter
+  const filteredDues = useMemo(() => {
+    return recurringTemplates.filter(template => {
+      const frequency = template.frequency || 'Monthly';
+      return frequency === duesFilter;
+    });
+  }, [recurringTemplates, duesFilter]);
+
   const totalMonthlyDues = useMemo(() => {
-    return recurringTemplates.reduce((sum, t) => sum + t.amount, 0);
-  }, [recurringTemplates]);
+    return filteredDues.reduce((sum, t) => sum + t.amount, 0);
+  }, [filteredDues]);
 
   const getPaidAmount = useMemo(() => {
     const currentMonthYear = formatMonthYear(new Date());
@@ -459,10 +468,23 @@ const App = () => {
 
   // Dashboard Component
   const Dashboard = () => (
-    <div style={{ padding: '1rem', paddingBottom: '6rem', backgroundColor: THEME.bg, minHeight: '100vh' }}>
+    <div style={{ padding: '1rem', paddingBottom: '6rem', backgroundColor: THEME.bg, minHeight: '100vh', overflowX: 'hidden' }}>
       <style>{`
         @import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&display=swap');
-        body { font-family: 'Inter', sans-serif; margin: 0; padding: 0; }
+        body {
+          font-family: 'Inter', sans-serif;
+          margin: 0;
+          padding: 0;
+          overflow-x: hidden;
+        }
+        ::-webkit-scrollbar {
+          width: 0px;
+          background: transparent;
+        }
+        * {
+          -ms-overflow-style: none;
+          scrollbar-width: none;
+        }
       `}</style>
 
       <h1 style={{ fontSize: '1.75rem', fontWeight: '800', color: THEME.text, marginBottom: '0.25rem', letterSpacing: '-0.02em' }}>Dashboard</h1>
@@ -533,46 +555,30 @@ const App = () => {
         }}>
           <h2 style={{ fontSize: '1.125rem', fontWeight: '700', color: THEME.text, letterSpacing: '-0.01em', flexShrink: 0 }}>Upcoming Dues</h2>
           <div style={{ display: 'flex', gap: '0.5rem', flexShrink: 0 }}>
-            <button style={{
-              padding: '0.5rem 1rem',
-              borderRadius: '0.5rem',
-              fontSize: '0.75rem',
-              fontWeight: '600',
-              backgroundColor: '#7c3aed',
-              color: 'white',
-              border: 'none',
-              cursor: 'pointer',
-              transition: 'all 0.2s ease',
-              ...MOBILE_TOUCH
-            }}>Monthly</button>
-            <button style={{
-              padding: '0.5rem 1rem',
-              borderRadius: '0.5rem',
-              fontSize: '0.75rem',
-              fontWeight: '500',
-              backgroundColor: 'transparent',
-              color: '#9ca3af',
-              border: 'none',
-              cursor: 'pointer',
-              transition: 'all 0.2s ease',
-              ...MOBILE_TOUCH
-            }}>Weekly</button>
-            <button style={{
-              padding: '0.5rem 1rem',
-              borderRadius: '0.5rem',
-              fontSize: '0.75rem',
-              fontWeight: '500',
-              backgroundColor: 'transparent',
-              color: '#9ca3af',
-              border: 'none',
-              cursor: 'pointer',
-              transition: 'all 0.2s ease',
-              ...MOBILE_TOUCH
-            }}>Daily</button>
+            {['Monthly', 'Weekly', 'Daily'].map(filter => (
+              <button
+                key={filter}
+                onClick={() => setDuesFilter(filter)}
+                style={{
+                  padding: '0.5rem 1rem',
+                  borderRadius: '0.5rem',
+                  fontSize: '0.75rem',
+                  fontWeight: duesFilter === filter ? '600' : '500',
+                  backgroundColor: duesFilter === filter ? '#7c3aed' : 'transparent',
+                  color: duesFilter === filter ? 'white' : '#9ca3af',
+                  border: 'none',
+                  cursor: 'pointer',
+                  transition: 'all 0.2s ease',
+                  ...MOBILE_TOUCH
+                }}
+              >
+                {filter}
+              </button>
+            ))}
           </div>
         </div>
 
-        {/* Total Monthly Dues Card */}
+        {/* Total Dues Card */}
         <div style={{
           backgroundColor: '#27272a',
           borderRadius: '1.25rem',
@@ -581,7 +587,7 @@ const App = () => {
           marginBottom: '1.25rem',
           border: '1px solid rgba(255,255,255,0.05)'
         }}>
-          <p style={{ fontSize: '0.8rem', color: '#9ca3af', marginBottom: '0.5rem', fontWeight: '500' }}>Total Monthly Dues</p>
+          <p style={{ fontSize: '0.8rem', color: '#9ca3af', marginBottom: '0.5rem', fontWeight: '500' }}>Total {duesFilter} Dues</p>
           <p style={{ fontSize: '2.5rem', fontWeight: '900', color: '#67e8f9', marginBottom: '1rem', letterSpacing: '-0.03em' }}>
             <AnimatedCounter value={totalMonthlyDues} />
           </p>
@@ -635,12 +641,12 @@ const App = () => {
               color: '#9ca3af',
               fontWeight: '500'
             }}>
-              {recurringTemplates.length} Items
+              {filteredDues.length} Items
             </span>
           </div>
 
-          {recurringTemplates.length > 0 ? (
-            recurringTemplates.slice(0, 4).map(bill => {
+          {filteredDues.length > 0 ? (
+            filteredDues.slice(0, 4).map(bill => {
               const currentMonthYear = formatMonthYear(new Date());
               const isPaid = expenses.some(exp =>
                 exp.recurringTemplateId === bill.id &&
@@ -702,7 +708,7 @@ const App = () => {
 
   // Reports Component
   const Reports = () => (
-    <div style={{ padding: '1rem', paddingBottom: '6rem', backgroundColor: THEME.bg, minHeight: '100vh' }}>
+    <div style={{ padding: '1rem', paddingBottom: '6rem', backgroundColor: THEME.bg, minHeight: '100vh', overflowX: 'hidden' }}>
       <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: '1.25rem' }}>
         <div>
           <h1 style={{ fontSize: '1.5rem', fontWeight: 'bold', color: THEME.text, marginBottom: '0.25rem' }}>Reports</h1>
@@ -905,7 +911,7 @@ const App = () => {
     };
 
     return (
-      <div style={{ padding: '1rem', paddingBottom: '6rem', backgroundColor: THEME.bg, minHeight: '100vh' }}>
+      <div style={{ padding: '1rem', paddingBottom: '6rem', backgroundColor: THEME.bg, minHeight: '100vh', overflowX: 'hidden' }}>
         <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: '1.25rem' }}>
           <div>
             <h1 style={{ fontSize: '1.5rem', fontWeight: 'bold', color: THEME.text, marginBottom: '0.25rem' }}>Add Income</h1>
@@ -1049,7 +1055,7 @@ const App = () => {
     const currentMonthYear = formatMonthYear(new Date());
 
     return (
-      <div style={{ padding: '1rem', paddingBottom: '6rem', backgroundColor: THEME.bg, minHeight: '100vh' }}>
+      <div style={{ padding: '1rem', paddingBottom: '6rem', backgroundColor: THEME.bg, minHeight: '100vh', overflowX: 'hidden' }}>
         <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: '1.25rem' }}>
           <div>
             <h1 style={{ fontSize: '1.5rem', fontWeight: 'bold', color: THEME.text, marginBottom: '0.25rem' }}>Recurring Bills</h1>
@@ -1196,7 +1202,8 @@ const App = () => {
       amount: '',
       date: new Date().toISOString().substring(0, 10),
       category: EXPENSE_CATEGORIES[0],
-      isRecurring: false
+      isRecurring: false,
+      frequency: 'Monthly'
     });
 
     const handleSubmit = (e) => {
@@ -1206,14 +1213,14 @@ const App = () => {
         return;
       }
       if (formData.isRecurring) {
-        handleAddRecurringTemplate({ ...formData, frequency: 'Monthly' });
+        handleAddRecurringTemplate(formData);
       } else {
         handleAddExpense(formData);
       }
     };
 
     return (
-      <div style={{ padding: '1rem', paddingBottom: '6rem', backgroundColor: THEME.bg, minHeight: '100vh' }}>
+      <div style={{ padding: '1rem', paddingBottom: '6rem', backgroundColor: THEME.bg, minHeight: '100vh', overflowX: 'hidden' }}>
         <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: '1.25rem' }}>
           <div>
             <h1 style={{ fontSize: '1.5rem', fontWeight: 'bold', color: THEME.text, marginBottom: '0.25rem' }}>Add Expense</h1>
@@ -1339,7 +1346,7 @@ const App = () => {
               padding: '1rem',
               backgroundColor: THEME.card,
               borderRadius: '0.75rem',
-              marginBottom: '2rem',
+              marginBottom: formData.isRecurring ? '1rem' : '2rem',
               cursor: 'pointer'
             }}
           >
@@ -1363,6 +1370,33 @@ const App = () => {
               Save as Recurring Bill
             </span>
           </div>
+
+          {/* Frequency Selector (shown only when isRecurring is true) */}
+          {formData.isRecurring && (
+            <div style={{ marginBottom: '2rem' }}>
+              <label style={{ display: 'block', fontSize: '0.875rem', color: THEME.textMuted, marginBottom: '0.5rem' }}>
+                Frequency
+              </label>
+              <select
+                value={formData.frequency}
+                onChange={(e) => setFormData({ ...formData, frequency: e.target.value })}
+                style={{
+                  width: '100%',
+                  padding: '1rem',
+                  borderRadius: '0.75rem',
+                  backgroundColor: THEME.card,
+                  border: 'none',
+                  color: THEME.text,
+                  cursor: 'pointer',
+                  ...MOBILE_INPUT
+                }}
+              >
+                <option value="Monthly">Monthly</option>
+                <option value="Weekly">Weekly</option>
+                <option value="Daily">Daily</option>
+              </select>
+            </div>
+          )}
 
           <button
             type="submit"
@@ -1534,7 +1568,8 @@ const App = () => {
       position: 'relative',
       paddingBottom: 'env(safe-area-inset-bottom)', // iOS safe area
       WebkitUserSelect: 'none', // Prevent text selection on mobile
-      userSelect: 'none'
+      userSelect: 'none',
+      overflowX: 'hidden'
     }}>
       {renderView()}
       <BottomNav />
