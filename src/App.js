@@ -556,22 +556,23 @@ const App = () => {
             flexShrink: 0,
             backgroundColor: '#1f1f1f',
             borderRadius: '0.5rem',
-            padding: '0.25rem',
+            padding: '0.375rem',
             position: 'relative',
-            minWidth: '180px'
+            minWidth: '190px',
+            gap: '0.5rem'
           }}>
             {/* Sliding Background */}
             <div style={{
               position: 'absolute',
-              top: '4px',
-              bottom: '4px',
-              left: '4px',
-              width: 'calc((100% - 8px) / 3)',
+              top: '6px',
+              bottom: '6px',
+              left: '6px',
+              width: 'calc((100% - 12px - 1rem) / 3)',
               backgroundColor: '#723FEB',
               borderRadius: '0.375rem',
               boxShadow: '0 1px 2px 0 rgba(0, 0, 0, 0.05)',
               transition: 'transform 0.3s cubic-bezier(0.25, 0.1, 0.25, 1)',
-              transform: `translateX(${duesFilter === 'Monthly' ? '0%' : duesFilter === 'Weekly' ? '100%' : '200%'})`
+              transform: `translateX(${duesFilter === 'Monthly' ? '0%' : duesFilter === 'Weekly' ? 'calc(100% + 0.5rem)' : 'calc(200% + 1rem)'})`
             }}></div>
 
             {['Monthly', 'Weekly', 'Daily'].map(filter => (
@@ -581,9 +582,9 @@ const App = () => {
                 style={{
                   position: 'relative',
                   zIndex: 10,
-                  padding: '0.5rem 0',
-                  fontSize: '0.75rem',
-                  fontWeight: '700',
+                  padding: '0.4rem 0',
+                  fontSize: '0.65rem',
+                  fontWeight: '600',
                   borderRadius: '0.375rem',
                   backgroundColor: 'transparent',
                   color: duesFilter === filter ? '#FFFFFF' : '#9CA3AF',
