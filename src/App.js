@@ -521,40 +521,52 @@ const App = () => {
 
       {/* Upcoming Dues Section */}
       <div style={{ marginBottom: '1rem' }}>
-        <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: '1rem', gap: '0.5rem' }}>
-          <h2 style={{ fontSize: '1.125rem', fontWeight: '800', color: THEME.text, letterSpacing: '-0.02em', flexShrink: 0 }}>Upcoming Dues</h2>
-          <div style={{ display: 'flex', gap: '0.25rem', flexShrink: 0 }}>
+        <div style={{
+          display: 'flex',
+          justifyContent: 'space-between',
+          alignItems: 'center',
+          marginBottom: '1rem',
+          padding: '1rem',
+          backgroundColor: '#27272a',
+          borderRadius: '1rem',
+          border: '1px solid rgba(255,255,255,0.05)'
+        }}>
+          <h2 style={{ fontSize: '1.125rem', fontWeight: '700', color: THEME.text, letterSpacing: '-0.01em', flexShrink: 0 }}>Upcoming Dues</h2>
+          <div style={{ display: 'flex', gap: '0.5rem', flexShrink: 0 }}>
             <button style={{
-              padding: '0.35rem 0.6rem',
-              borderRadius: '0.4rem',
-              fontSize: '0.65rem',
+              padding: '0.5rem 1rem',
+              borderRadius: '0.5rem',
+              fontSize: '0.75rem',
               fontWeight: '600',
-              backgroundColor: '#6366f1',
+              backgroundColor: '#7c3aed',
               color: 'white',
               border: 'none',
               cursor: 'pointer',
+              transition: 'all 0.2s ease',
               ...MOBILE_TOUCH
             }}>Monthly</button>
             <button style={{
-              padding: '0.35rem 0.6rem',
-              borderRadius: '0.4rem',
-              fontSize: '0.65rem',
+              padding: '0.5rem 1rem',
+              borderRadius: '0.5rem',
+              fontSize: '0.75rem',
               fontWeight: '500',
               backgroundColor: 'transparent',
               color: '#9ca3af',
               border: 'none',
               cursor: 'pointer',
+              transition: 'all 0.2s ease',
               ...MOBILE_TOUCH
             }}>Weekly</button>
             <button style={{
-              padding: '0.35rem 0.6rem',
-              borderRadius: '0.4rem',
-              fontSize: '0.65rem',
+              padding: '0.5rem 1rem',
+              borderRadius: '0.5rem',
+              fontSize: '0.75rem',
               fontWeight: '500',
               backgroundColor: 'transparent',
               color: '#9ca3af',
               border: 'none',
               cursor: 'pointer',
+              transition: 'all 0.2s ease',
               ...MOBILE_TOUCH
             }}>Daily</button>
           </div>
