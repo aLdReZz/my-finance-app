@@ -552,8 +552,11 @@ const App = () => {
           <h2 style={{ fontSize: '1rem', fontWeight: '700', color: THEME.text, letterSpacing: '-0.01em', flexShrink: 0 }}>Upcoming Dues</h2>
           <div style={{
             display: 'flex',
-            gap: '0.375rem',
-            flexShrink: 0
+            gap: '0.25rem',
+            flexShrink: 0,
+            backgroundColor: '#2a2a2a',
+            borderRadius: '9999px',
+            padding: '0.25rem'
           }}>
             {['Monthly', 'Weekly', 'Daily'].map(filter => (
               <button
@@ -564,7 +567,7 @@ const App = () => {
                   borderRadius: '9999px',
                   fontSize: '0.7rem',
                   fontWeight: '600',
-                  backgroundColor: duesFilter === filter ? '#7c3aed' : '#2a2a2a',
+                  backgroundColor: duesFilter === filter ? '#7c3aed' : 'transparent',
                   color: duesFilter === filter ? 'white' : '#9ca3af',
                   border: 'none',
                   cursor: 'pointer',
