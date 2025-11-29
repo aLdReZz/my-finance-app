@@ -658,24 +658,22 @@ const App = () => {
                   <div style={{ textAlign: 'right', flexShrink: 0 }}>
                     <p style={{ fontWeight: '800', color: THEME.text, fontSize: '1rem', marginBottom: '0.25rem', whiteSpace: 'nowrap' }}>{formatCurrency(bill.amount)}</p>
                     {isPaid ? (
-                      <span style={{ fontSize: '0.65rem', color: '#22c55e', textTransform: 'uppercase', fontWeight: '800', letterSpacing: '0.05em' }}>PAID</span>
+                      <span style={{ fontSize: '0.75rem', color: '#22c55e', fontWeight: '600' }}>Paid</span>
                     ) : (
                       <button
                         onClick={() => handleMarkPaid(bill)}
                         style={{
-                          fontSize: '0.6rem',
-                          fontWeight: '700',
-                          textTransform: 'uppercase',
+                          fontSize: '0.75rem',
+                          fontWeight: '600',
                           backgroundColor: 'transparent',
                           color: '#9ca3af',
                           border: 'none',
                           padding: '0.25rem',
                           cursor: 'pointer',
-                          letterSpacing: '0.03em',
                           ...MOBILE_TOUCH
                         }}
                       >
-                        MARK PAID
+                        Mark Paid
                       </button>
                     )}
                   </div>
