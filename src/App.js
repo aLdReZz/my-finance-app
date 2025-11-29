@@ -555,7 +555,7 @@ const App = () => {
             gridTemplateColumns: 'repeat(3, minmax(0, 1fr))',
             flexShrink: 0,
             backgroundColor: '#1f1f1f',
-            borderRadius: '0.75rem',
+            borderRadius: '0.5rem',
             padding: '0.25rem',
             position: 'relative',
             minWidth: '180px'
@@ -568,7 +568,7 @@ const App = () => {
               left: '4px',
               width: 'calc((100% - 8px) / 3)',
               backgroundColor: '#723FEB',
-              borderRadius: '0.5rem',
+              borderRadius: '0.375rem',
               boxShadow: '0 1px 2px 0 rgba(0, 0, 0, 0.05)',
               transition: 'transform 0.3s cubic-bezier(0.25, 0.1, 0.25, 1)',
               transform: `translateX(${duesFilter === 'Monthly' ? '0%' : duesFilter === 'Weekly' ? '100%' : '200%'})`
@@ -584,7 +584,7 @@ const App = () => {
                   padding: '0.5rem 0',
                   fontSize: '0.75rem',
                   fontWeight: '700',
-                  borderRadius: '0.5rem',
+                  borderRadius: '0.375rem',
                   backgroundColor: 'transparent',
                   color: duesFilter === filter ? '#FFFFFF' : '#9CA3AF',
                   border: 'none',
