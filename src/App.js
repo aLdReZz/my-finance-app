@@ -115,7 +115,6 @@ const AnimatedCounter = ({ value }) => {
 // Main App Component
 const App = () => {
   const [db, setDb] = useState(null);
-  const [auth, setAuth] = useState(null);
   const [userId, setUserId] = useState(null);
   const [isAuthReady, setIsAuthReady] = useState(false);
   const [isLoading, setIsLoading] = useState(true);
@@ -127,7 +126,6 @@ const App = () => {
 
   const [activeView, setActiveView] = useState('Home');
   const [reportView, setReportView] = useState('Monthly');
-  const [currentDate, setCurrentDate] = useState(new Date());
 
   // Firebase Initialization
   useEffect(() => {
@@ -143,7 +141,6 @@ const App = () => {
         const firebaseAuth = getAuth(firebaseApp);
 
         setDb(firestoreDb);
-        setAuth(firebaseAuth);
 
         onAuthStateChanged(firebaseAuth, async (user) => {
           if (!user) {
@@ -262,7 +259,7 @@ const App = () => {
   const handleAddRecurringTemplate = async (data) => {
     if (!db || !userId) return;
     try {
-      const [year, month, day] = data.date.split('-').map(Number);
+      const day = data.date.split('-').map(Number)[2];
       await addDoc(collection(db, getRecurringTemplateCollectionPath(userId)), {
         name: data.name,
         amount: parseFloat(data.amount),
@@ -324,11 +321,6 @@ const App = () => {
   };
 
   // Calculations
-  const netWorth = useMemo(() => {
-    return incomes.reduce((sum, i) => sum + i.amount, 0) -
-           expenses.reduce((sum, e) => sum + e.amount, 0);
-  }, [incomes, expenses]);
-
   const avgMonthlyIncome = useMemo(() => {
     if (incomes.length === 0) return 0;
     const totalIncome = incomes.reduce((sum, inc) => sum + inc.amount, 0);
@@ -1511,7 +1503,6 @@ const App = () => {
       maxWidth: '28rem',
       margin: '0 auto',
       backgroundColor: THEME.bg,
-      minHeight: '100vh',
       minHeight: '100dvh', // Dynamic viewport height for mobile
       position: 'relative',
       paddingBottom: 'env(safe-area-inset-bottom)', // iOS safe area
