@@ -459,75 +459,75 @@ const App = () => {
 
   // Dashboard Component
   const Dashboard = () => (
-    <div style={{ padding: '1.5rem', paddingBottom: '7rem', backgroundColor: THEME.bg, minHeight: '100vh' }}>
+    <div style={{ padding: '1rem', paddingBottom: '6rem', backgroundColor: THEME.bg, minHeight: '100vh' }}>
       <style>{`
         @import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&display=swap');
-        body { font-family: 'Inter', sans-serif; }
+        body { font-family: 'Inter', sans-serif; margin: 0; padding: 0; }
       `}</style>
 
-      <h1 style={{ fontSize: '2rem', fontWeight: '800', color: THEME.text, marginBottom: '0.25rem', letterSpacing: '-0.02em' }}>Dashboard</h1>
-      <p style={{ fontSize: '0.9rem', color: '#a78bfa', marginBottom: '2rem', fontWeight: '400' }}>Welcome back!</p>
+      <h1 style={{ fontSize: '1.75rem', fontWeight: '800', color: THEME.text, marginBottom: '0.25rem', letterSpacing: '-0.02em' }}>Dashboard</h1>
+      <p style={{ fontSize: '0.85rem', color: '#a78bfa', marginBottom: '1.5rem', fontWeight: '400' }}>Welcome back!</p>
 
       {/* Income & Expense Cards */}
-      <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: '1rem', marginBottom: '2rem' }}>
+      <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: '0.75rem', marginBottom: '1.5rem' }}>
         <div style={{
           backgroundColor: '#27272a',
-          borderRadius: '1.25rem',
-          padding: '1.5rem',
+          borderRadius: '1rem',
+          padding: '1rem',
           border: '1px solid rgba(255,255,255,0.05)'
         }}>
           <div style={{
-            width: '48px',
-            height: '48px',
-            borderRadius: '0.75rem',
+            width: '40px',
+            height: '40px',
+            borderRadius: '0.625rem',
             backgroundColor: 'rgba(96, 165, 250, 0.15)',
             display: 'flex',
             alignItems: 'center',
             justifyContent: 'center',
-            marginBottom: '1rem'
+            marginBottom: '0.75rem'
           }}>
-            <Wallet size={24} color="#60a5fa" strokeWidth={2} />
+            <Wallet size={20} color="#60a5fa" strokeWidth={2} />
           </div>
-          <p style={{ fontSize: '0.875rem', color: '#9ca3af', marginBottom: '0.5rem', fontWeight: '500' }}>Avg. Income</p>
-          <p style={{ fontSize: '1.75rem', fontWeight: '800', color: THEME.text, letterSpacing: '-0.02em' }}>
+          <p style={{ fontSize: '0.75rem', color: '#9ca3af', marginBottom: '0.375rem', fontWeight: '500' }}>Avg. Income</p>
+          <p style={{ fontSize: '1.5rem', fontWeight: '800', color: THEME.text, letterSpacing: '-0.02em' }}>
             <AnimatedCounter value={avgMonthlyIncome} />
           </p>
         </div>
 
         <div style={{
           backgroundColor: '#27272a',
-          borderRadius: '1.25rem',
-          padding: '1.5rem',
+          borderRadius: '1rem',
+          padding: '1rem',
           border: '1px solid rgba(255,255,255,0.05)'
         }}>
           <div style={{
-            width: '48px',
-            height: '48px',
-            borderRadius: '0.75rem',
+            width: '40px',
+            height: '40px',
+            borderRadius: '0.625rem',
             backgroundColor: 'rgba(139, 92, 246, 0.15)',
             display: 'flex',
             alignItems: 'center',
             justifyContent: 'center',
-            marginBottom: '1rem'
+            marginBottom: '0.75rem'
           }}>
-            <CreditCard size={24} color="#8b5cf6" strokeWidth={2} />
+            <CreditCard size={20} color="#8b5cf6" strokeWidth={2} />
           </div>
-          <p style={{ fontSize: '0.875rem', color: '#9ca3af', marginBottom: '0.5rem', fontWeight: '500' }}>Avg. Expenses</p>
-          <p style={{ fontSize: '1.75rem', fontWeight: '800', color: THEME.text, letterSpacing: '-0.02em' }}>
+          <p style={{ fontSize: '0.75rem', color: '#9ca3af', marginBottom: '0.375rem', fontWeight: '500' }}>Avg. Expenses</p>
+          <p style={{ fontSize: '1.5rem', fontWeight: '800', color: THEME.text, letterSpacing: '-0.02em' }}>
             <AnimatedCounter value={avgMonthlyExpense} />
           </p>
         </div>
       </div>
 
       {/* Upcoming Dues Section */}
-      <div style={{ marginBottom: '1.5rem' }}>
-        <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: '1.5rem' }}>
-          <h2 style={{ fontSize: '1.5rem', fontWeight: '800', color: THEME.text, letterSpacing: '-0.02em' }}>Upcoming Dues</h2>
-          <div style={{ display: 'flex', gap: '0.5rem' }}>
+      <div style={{ marginBottom: '1rem' }}>
+        <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: '1rem', flexWrap: 'wrap', gap: '0.5rem' }}>
+          <h2 style={{ fontSize: '1.25rem', fontWeight: '800', color: THEME.text, letterSpacing: '-0.02em' }}>Upcoming Dues</h2>
+          <div style={{ display: 'flex', gap: '0.375rem' }}>
             <button style={{
-              padding: '0.5rem 1rem',
+              padding: '0.375rem 0.75rem',
               borderRadius: '0.5rem',
-              fontSize: '0.8rem',
+              fontSize: '0.7rem',
               fontWeight: '600',
               backgroundColor: '#6366f1',
               color: 'white',
@@ -536,9 +536,9 @@ const App = () => {
               ...MOBILE_TOUCH
             }}>Monthly</button>
             <button style={{
-              padding: '0.5rem 1rem',
+              padding: '0.375rem 0.75rem',
               borderRadius: '0.5rem',
-              fontSize: '0.8rem',
+              fontSize: '0.7rem',
               fontWeight: '500',
               backgroundColor: 'transparent',
               color: '#9ca3af',
@@ -547,9 +547,9 @@ const App = () => {
               ...MOBILE_TOUCH
             }}>Weekly</button>
             <button style={{
-              padding: '0.5rem 1rem',
+              padding: '0.375rem 0.75rem',
               borderRadius: '0.5rem',
-              fontSize: '0.8rem',
+              fontSize: '0.7rem',
               fontWeight: '500',
               backgroundColor: 'transparent',
               color: '#9ca3af',
@@ -563,32 +563,33 @@ const App = () => {
         {/* Total Monthly Dues Card */}
         <div style={{
           backgroundColor: '#27272a',
-          borderRadius: '1.5rem',
-          padding: '2rem',
+          borderRadius: '1.25rem',
+          padding: '1.5rem',
           textAlign: 'center',
-          marginBottom: '1.5rem',
+          marginBottom: '1.25rem',
           border: '1px solid rgba(255,255,255,0.05)'
         }}>
-          <p style={{ fontSize: '0.9rem', color: '#9ca3af', marginBottom: '0.75rem', fontWeight: '500' }}>Total Monthly Dues</p>
-          <p style={{ fontSize: '3.5rem', fontWeight: '900', color: '#67e8f9', marginBottom: '1.5rem', letterSpacing: '-0.03em' }}>
+          <p style={{ fontSize: '0.8rem', color: '#9ca3af', marginBottom: '0.5rem', fontWeight: '500' }}>Total Monthly Dues</p>
+          <p style={{ fontSize: '2.5rem', fontWeight: '900', color: '#67e8f9', marginBottom: '1rem', letterSpacing: '-0.03em' }}>
             <AnimatedCounter value={totalMonthlyDues} />
           </p>
 
           <div style={{
             backgroundColor: '#1f1f1f',
-            borderRadius: '1rem',
-            padding: '1.25rem',
+            borderRadius: '0.875rem',
+            padding: '1rem',
           }}>
-            <div style={{ display: 'flex', justifyContent: 'space-between', marginBottom: '0.75rem' }}>
-              <div>
-                <p style={{ fontSize: '0.7rem', textTransform: 'uppercase', color: '#6b7280', fontWeight: '700', letterSpacing: '0.05em' }}>REMAINING TO PAY</p>
-                <p style={{ fontSize: '1.5rem', fontWeight: '800', color: '#ef4444', marginTop: '0.25rem' }}>
+            <div style={{ display: 'flex', justifyContent: 'space-between', marginBottom: '0.625rem', gap: '0.5rem' }}>
+              <div style={{ flex: '1', minWidth: '0' }}>
+                <p style={{ fontSize: '0.65rem', textTransform: 'uppercase', color: '#6b7280', fontWeight: '700', letterSpacing: '0.05em' }}>REMAINING</p>
+                <p style={{ fontSize: '1.25rem', fontWeight: '800', color: '#ef4444', marginTop: '0.25rem' }}>
                   <AnimatedCounter value={remainingToPay} />
                 </p>
               </div>
-              <div style={{ textAlign: 'right' }}>
-                <p style={{ fontSize: '0.75rem', color: '#6b7280', fontWeight: '500' }}>
-                  Paid: <AnimatedCounter value={getPaidAmount} />
+              <div style={{ textAlign: 'right', flex: '1', minWidth: '0' }}>
+                <p style={{ fontSize: '0.65rem', color: '#6b7280', fontWeight: '700', textTransform: 'uppercase', letterSpacing: '0.05em' }}>PAID</p>
+                <p style={{ fontSize: '1.25rem', fontWeight: '800', color: '#22c55e', marginTop: '0.25rem' }}>
+                  <AnimatedCounter value={getPaidAmount} />
                 </p>
               </div>
             </div>
@@ -614,11 +615,11 @@ const App = () => {
         </div>
 
         {/* Due Details */}
-        <div style={{ marginBottom: '1rem' }}>
-          <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: '1rem' }}>
-            <h3 style={{ fontSize: '1.25rem', fontWeight: '800', color: THEME.text, letterSpacing: '-0.02em' }}>Due Details</h3>
+        <div style={{ marginBottom: '0.5rem' }}>
+          <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: '0.75rem' }}>
+            <h3 style={{ fontSize: '1.125rem', fontWeight: '800', color: THEME.text, letterSpacing: '-0.02em' }}>Due Details</h3>
             <span style={{
-              fontSize: '0.75rem',
+              fontSize: '0.7rem',
               color: '#9ca3af',
               fontWeight: '500'
             }}>
@@ -640,34 +641,35 @@ const App = () => {
                   display: 'flex',
                   justifyContent: 'space-between',
                   alignItems: 'center',
-                  padding: '1.25rem',
+                  padding: '1rem',
                   backgroundColor: '#27272a',
-                  borderRadius: '1rem',
-                  marginBottom: '0.75rem',
-                  borderLeft: `5px solid ${isPaid ? '#22c55e' : '#6366f1'}`,
+                  borderRadius: '0.875rem',
+                  marginBottom: '0.625rem',
+                  borderLeft: `4px solid ${isPaid ? '#22c55e' : '#6366f1'}`,
                   border: '1px solid rgba(255,255,255,0.05)',
-                  borderLeftWidth: '5px',
-                  borderLeftColor: isPaid ? '#22c55e' : '#6366f1'
+                  borderLeftWidth: '4px',
+                  borderLeftColor: isPaid ? '#22c55e' : '#6366f1',
+                  gap: '0.75rem'
                 }}>
-                  <div>
-                    <p style={{ fontWeight: '700', color: THEME.text, marginBottom: '0.35rem', fontSize: '0.95rem' }}>{bill.name}</p>
-                    <p style={{ fontSize: '0.8rem', color: '#9ca3af', fontWeight: '500' }}>Due on the {dueDay}th</p>
+                  <div style={{ flex: '1', minWidth: '0' }}>
+                    <p style={{ fontWeight: '700', color: THEME.text, marginBottom: '0.25rem', fontSize: '0.875rem', overflow: 'hidden', textOverflow: 'ellipsis', whiteSpace: 'nowrap' }}>{bill.name}</p>
+                    <p style={{ fontSize: '0.7rem', color: '#9ca3af', fontWeight: '500' }}>Due on the {dueDay}th</p>
                   </div>
-                  <div style={{ textAlign: 'right' }}>
-                    <p style={{ fontWeight: '800', color: THEME.text, fontSize: '1.1rem', marginBottom: '0.25rem' }}>{formatCurrency(bill.amount)}</p>
+                  <div style={{ textAlign: 'right', flexShrink: 0 }}>
+                    <p style={{ fontWeight: '800', color: THEME.text, fontSize: '1rem', marginBottom: '0.25rem', whiteSpace: 'nowrap' }}>{formatCurrency(bill.amount)}</p>
                     {isPaid ? (
-                      <span style={{ fontSize: '0.7rem', color: '#22c55e', textTransform: 'uppercase', fontWeight: '800', letterSpacing: '0.05em' }}>PAID</span>
+                      <span style={{ fontSize: '0.65rem', color: '#22c55e', textTransform: 'uppercase', fontWeight: '800', letterSpacing: '0.05em' }}>PAID</span>
                     ) : (
                       <button
                         onClick={() => handleMarkPaid(bill)}
                         style={{
-                          fontSize: '0.65rem',
+                          fontSize: '0.6rem',
                           fontWeight: '700',
                           textTransform: 'uppercase',
                           backgroundColor: 'transparent',
                           color: '#9ca3af',
                           border: 'none',
-                          padding: '0',
+                          padding: '0.25rem',
                           cursor: 'pointer',
                           letterSpacing: '0.03em',
                           ...MOBILE_TOUCH
@@ -681,7 +683,7 @@ const App = () => {
               );
             })
           ) : (
-            <p style={{ textAlign: 'center', color: THEME.textMuted, padding: '2rem' }}>No bills set up yet</p>
+            <p style={{ textAlign: 'center', color: THEME.textMuted, padding: '1.5rem' }}>No bills set up yet</p>
           )}
         </div>
       </div>
@@ -690,11 +692,11 @@ const App = () => {
 
   // Reports Component
   const Reports = () => (
-    <div style={{ padding: '1.5rem', paddingBottom: '7rem', backgroundColor: THEME.bg, minHeight: '100vh' }}>
-      <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: '1.5rem' }}>
+    <div style={{ padding: '1rem', paddingBottom: '6rem', backgroundColor: THEME.bg, minHeight: '100vh' }}>
+      <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: '1.25rem' }}>
         <div>
-          <h1 style={{ fontSize: '1.75rem', fontWeight: 'bold', color: THEME.text, marginBottom: '0.25rem' }}>Reports</h1>
-          <p style={{ fontSize: '0.875rem', color: THEME.textMuted }}>Welcome back!</p>
+          <h1 style={{ fontSize: '1.5rem', fontWeight: 'bold', color: THEME.text, marginBottom: '0.25rem' }}>Reports</h1>
+          <p style={{ fontSize: '0.8rem', color: THEME.textMuted }}>Welcome back!</p>
         </div>
         <button
           onClick={() => setActiveView('Home')}
@@ -893,11 +895,11 @@ const App = () => {
     };
 
     return (
-      <div style={{ padding: '1.5rem', paddingBottom: '7rem', backgroundColor: THEME.bg, minHeight: '100vh' }}>
-        <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: '1.5rem' }}>
+      <div style={{ padding: '1rem', paddingBottom: '6rem', backgroundColor: THEME.bg, minHeight: '100vh' }}>
+        <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: '1.25rem' }}>
           <div>
-            <h1 style={{ fontSize: '1.75rem', fontWeight: 'bold', color: THEME.text, marginBottom: '0.25rem' }}>AddIncome</h1>
-            <p style={{ fontSize: '0.875rem', color: THEME.textMuted }}>Welcome back!</p>
+            <h1 style={{ fontSize: '1.5rem', fontWeight: 'bold', color: THEME.text, marginBottom: '0.25rem' }}>Add Income</h1>
+            <p style={{ fontSize: '0.8rem', color: THEME.textMuted }}>Track your earnings</p>
           </div>
           <button
             onClick={() => setActiveView('Home')}
@@ -1037,11 +1039,11 @@ const App = () => {
     const currentMonthYear = formatMonthYear(new Date());
 
     return (
-      <div style={{ padding: '1.5rem', paddingBottom: '7rem', backgroundColor: THEME.bg, minHeight: '100vh' }}>
-        <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: '1.5rem' }}>
+      <div style={{ padding: '1rem', paddingBottom: '6rem', backgroundColor: THEME.bg, minHeight: '100vh' }}>
+        <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: '1.25rem' }}>
           <div>
-            <h1 style={{ fontSize: '1.75rem', fontWeight: 'bold', color: THEME.text, marginBottom: '0.25rem' }}>Recurring</h1>
-            <p style={{ fontSize: '0.875rem', color: THEME.textMuted }}>Welcome back!</p>
+            <h1 style={{ fontSize: '1.5rem', fontWeight: 'bold', color: THEME.text, marginBottom: '0.25rem' }}>Recurring Bills</h1>
+            <p style={{ fontSize: '0.8rem', color: THEME.textMuted }}>Manage your bills</p>
           </div>
           <button
             onClick={() => setActiveView('Home')}
@@ -1201,11 +1203,11 @@ const App = () => {
     };
 
     return (
-      <div style={{ padding: '1.5rem', paddingBottom: '7rem', backgroundColor: THEME.bg, minHeight: '100vh' }}>
-        <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: '1.5rem' }}>
+      <div style={{ padding: '1rem', paddingBottom: '6rem', backgroundColor: THEME.bg, minHeight: '100vh' }}>
+        <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: '1.25rem' }}>
           <div>
-            <h1 style={{ fontSize: '1.75rem', fontWeight: 'bold', color: THEME.text, marginBottom: '0.25rem' }}>AddExpense</h1>
-            <p style={{ fontSize: '0.875rem', color: THEME.textMuted }}>Welcome back!</p>
+            <h1 style={{ fontSize: '1.5rem', fontWeight: 'bold', color: THEME.text, marginBottom: '0.25rem' }}>Add Expense</h1>
+            <p style={{ fontSize: '0.8rem', color: THEME.textMuted }}>Track your spending</p>
           </div>
           <button
             onClick={() => setActiveView('Home')}
@@ -1381,19 +1383,22 @@ const App = () => {
   const BottomNav = () => (
     <div style={{
       position: 'fixed',
-      bottom: '1.5rem',
+      bottom: '1rem',
       left: '50%',
       transform: 'translateX(-50%)',
       zIndex: 50,
-      paddingBottom: 'env(safe-area-inset-bottom)'
+      paddingBottom: 'env(safe-area-inset-bottom)',
+      width: 'calc(100% - 2rem)',
+      maxWidth: '26rem'
     }}>
       <div style={{
         backgroundColor: '#1f1f1f',
-        borderRadius: '2rem',
+        borderRadius: '1.5rem',
         display: 'flex',
         alignItems: 'center',
-        padding: '0.75rem 1.5rem',
-        gap: '1rem',
+        justifyContent: 'space-around',
+        padding: '0.625rem 1rem',
+        gap: '0.5rem',
         boxShadow: '0 8px 32px rgba(0,0,0,0.4)',
         border: '1px solid rgba(255,255,255,0.08)'
       }}>
@@ -1407,13 +1412,14 @@ const App = () => {
             border: 'none',
             color: activeView === 'Home' ? '#ffffff' : '#6b7280',
             cursor: 'pointer',
-            padding: '0.5rem 0.75rem',
+            padding: '0.375rem 0.5rem',
             gap: '0.25rem',
-            ...MOBILE_TOUCH
+            ...MOBILE_TOUCH,
+            flex: 1
           }}
         >
-          <Home size={22} strokeWidth={2} />
-          <span style={{ fontSize: '0.625rem', fontWeight: '500' }}>Home</span>
+          <Home size={20} strokeWidth={2} />
+          <span style={{ fontSize: '0.6rem', fontWeight: '500' }}>Home</span>
         </button>
 
         <button
@@ -1426,20 +1432,21 @@ const App = () => {
             border: 'none',
             color: activeView === 'Reports' ? '#ffffff' : '#6b7280',
             cursor: 'pointer',
-            padding: '0.5rem 0.75rem',
+            padding: '0.375rem 0.5rem',
             gap: '0.25rem',
-            ...MOBILE_TOUCH
+            ...MOBILE_TOUCH,
+            flex: 1
           }}
         >
-          <TrendingUp size={22} strokeWidth={2} />
-          <span style={{ fontSize: '0.625rem', fontWeight: '500' }}>Reports</span>
+          <TrendingUp size={20} strokeWidth={2} />
+          <span style={{ fontSize: '0.6rem', fontWeight: '500' }}>Reports</span>
         </button>
 
         <button
           onClick={() => setActiveView(activeView === 'AddIncome' ? 'AddExpense' : 'AddIncome')}
           style={{
-            width: '3.5rem',
-            height: '3.5rem',
+            width: '3rem',
+            height: '3rem',
             borderRadius: '50%',
             background: 'linear-gradient(135deg, #7c7cf5 0%, #9f7cf5 100%)',
             border: 'none',
@@ -1449,10 +1456,11 @@ const App = () => {
             cursor: 'pointer',
             position: 'relative',
             boxShadow: '0 4px 16px rgba(124, 124, 245, 0.4)',
-            ...MOBILE_TOUCH
+            ...MOBILE_TOUCH,
+            flexShrink: 0
           }}
         >
-          <Plus size={24} color="white" strokeWidth={3} />
+          <Plus size={22} color="white" strokeWidth={3} />
         </button>
 
         <button
@@ -1465,13 +1473,14 @@ const App = () => {
             border: 'none',
             color: activeView === 'Recurring' ? '#ffffff' : '#6b7280',
             cursor: 'pointer',
-            padding: '0.5rem 0.75rem',
+            padding: '0.375rem 0.5rem',
             gap: '0.25rem',
-            ...MOBILE_TOUCH
+            ...MOBILE_TOUCH,
+            flex: 1
           }}
         >
-          <Calendar size={22} strokeWidth={2} />
-          <span style={{ fontSize: '0.625rem', fontWeight: '500' }}>Bills</span>
+          <Calendar size={20} strokeWidth={2} />
+          <span style={{ fontSize: '0.6rem', fontWeight: '500' }}>Bills</span>
         </button>
 
         <button
@@ -1484,13 +1493,14 @@ const App = () => {
             border: 'none',
             color: activeView === 'AddExpense' ? '#ffffff' : '#6b7280',
             cursor: 'pointer',
-            padding: '0.5rem 0.75rem',
+            padding: '0.375rem 0.5rem',
             gap: '0.25rem',
-            ...MOBILE_TOUCH
+            ...MOBILE_TOUCH,
+            flex: 1
           }}
         >
-          <TrendingDown size={22} strokeWidth={2} />
-          <span style={{ fontSize: '0.625rem', fontWeight: '500' }}>Expense</span>
+          <TrendingDown size={20} strokeWidth={2} />
+          <span style={{ fontSize: '0.6rem', fontWeight: '500' }}>Expense</span>
         </button>
       </div>
     </div>
