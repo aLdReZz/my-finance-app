@@ -547,25 +547,21 @@ const App = () => {
           display: 'flex',
           justifyContent: 'space-between',
           alignItems: 'center',
-          marginBottom: '1rem',
-          padding: '1rem',
-          backgroundColor: '#27272a',
-          borderRadius: '1rem',
-          border: '1px solid rgba(255,255,255,0.05)'
+          marginBottom: '1rem'
         }}>
-          <h2 style={{ fontSize: '1.125rem', fontWeight: '700', color: THEME.text, letterSpacing: '-0.01em', flexShrink: 0 }}>Upcoming Dues</h2>
-          <div style={{ display: 'flex', gap: '0.5rem', flexShrink: 0 }}>
+          <h2 style={{ fontSize: '1.25rem', fontWeight: '700', color: THEME.text, letterSpacing: '-0.01em', flexShrink: 0 }}>Upcoming Dues</h2>
+          <div style={{ display: 'flex', gap: '0.375rem', flexShrink: 0 }}>
             {['Monthly', 'Weekly', 'Daily'].map(filter => (
               <button
                 key={filter}
                 onClick={() => setDuesFilter(filter)}
                 style={{
-                  padding: '0.5rem 1rem',
+                  padding: '0.375rem 0.75rem',
                   borderRadius: '0.5rem',
-                  fontSize: '0.75rem',
-                  fontWeight: duesFilter === filter ? '600' : '500',
-                  backgroundColor: duesFilter === filter ? '#7c3aed' : 'transparent',
-                  color: duesFilter === filter ? 'white' : '#9ca3af',
+                  fontSize: '0.7rem',
+                  fontWeight: '600',
+                  backgroundColor: duesFilter === filter ? '#7c3aed' : 'rgba(124, 58, 237, 0.15)',
+                  color: duesFilter === filter ? 'white' : '#a78bfa',
                   border: 'none',
                   cursor: 'pointer',
                   transition: 'all 0.2s ease',
