@@ -551,27 +551,45 @@ const App = () => {
         }}>
           <h2 style={{ fontSize: '1rem', fontWeight: '700', color: THEME.text, letterSpacing: '-0.01em', flexShrink: 0 }}>Upcoming Dues</h2>
           <div style={{
-            display: 'flex',
-            gap: '0.25rem',
+            display: 'grid',
+            gridTemplateColumns: 'repeat(3, minmax(0, 1fr))',
             flexShrink: 0,
-            backgroundColor: '#2a2a2a',
-            borderRadius: '9999px',
-            padding: '0.25rem'
+            backgroundColor: '#1f1f1f',
+            borderRadius: '0.75rem',
+            padding: '0.25rem',
+            position: 'relative',
+            minWidth: '180px'
           }}>
+            {/* Sliding Background */}
+            <div style={{
+              position: 'absolute',
+              top: '4px',
+              bottom: '4px',
+              left: '4px',
+              width: 'calc((100% - 8px) / 3)',
+              backgroundColor: '#723FEB',
+              borderRadius: '0.5rem',
+              boxShadow: '0 1px 2px 0 rgba(0, 0, 0, 0.05)',
+              transition: 'transform 0.3s cubic-bezier(0.25, 0.1, 0.25, 1)',
+              transform: `translateX(${duesFilter === 'Monthly' ? '0%' : duesFilter === 'Weekly' ? '100%' : '200%'})`
+            }}></div>
+
             {['Monthly', 'Weekly', 'Daily'].map(filter => (
               <button
                 key={filter}
                 onClick={() => setDuesFilter(filter)}
                 style={{
-                  padding: '0.375rem 0.75rem',
-                  borderRadius: '9999px',
-                  fontSize: '0.7rem',
-                  fontWeight: '600',
-                  backgroundColor: duesFilter === filter ? '#7c3aed' : 'transparent',
-                  color: duesFilter === filter ? 'white' : '#9ca3af',
+                  position: 'relative',
+                  zIndex: 10,
+                  padding: '0.5rem 0',
+                  fontSize: '0.75rem',
+                  fontWeight: '700',
+                  borderRadius: '0.5rem',
+                  backgroundColor: 'transparent',
+                  color: duesFilter === filter ? '#FFFFFF' : '#9CA3AF',
                   border: 'none',
                   cursor: 'pointer',
-                  transition: 'all 0.2s ease',
+                  transition: 'color 0.2s',
                   whiteSpace: 'nowrap',
                   ...MOBILE_TOUCH
                 }}
