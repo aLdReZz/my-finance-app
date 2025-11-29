@@ -1383,24 +1383,26 @@ const App = () => {
   const BottomNav = () => (
     <div style={{
       position: 'fixed',
-      bottom: '1rem',
+      bottom: '0.75rem',
       left: '50%',
       transform: 'translateX(-50%)',
       zIndex: 50,
       paddingBottom: 'env(safe-area-inset-bottom)',
-      width: 'calc(100% - 2rem)',
-      maxWidth: '26rem'
+      width: 'calc(100% - 1.5rem)',
+      maxWidth: '24rem'
     }}>
       <div style={{
-        backgroundColor: '#1f1f1f',
-        borderRadius: '1.5rem',
+        backgroundColor: 'rgba(31, 31, 31, 0.7)',
+        backdropFilter: 'blur(20px)',
+        WebkitBackdropFilter: 'blur(20px)',
+        borderRadius: '1.25rem',
         display: 'flex',
         alignItems: 'center',
         justifyContent: 'space-around',
-        padding: '0.625rem 1rem',
-        gap: '0.5rem',
-        boxShadow: '0 8px 32px rgba(0,0,0,0.4)',
-        border: '1px solid rgba(255,255,255,0.08)'
+        padding: '0.5rem 0.75rem',
+        gap: '0.25rem',
+        boxShadow: '0 8px 32px rgba(0,0,0,0.3), inset 0 1px 0 rgba(255,255,255,0.1)',
+        border: '1px solid rgba(255,255,255,0.1)'
       }}>
         <button
           onClick={() => setActiveView('Home')}
@@ -1412,14 +1414,15 @@ const App = () => {
             border: 'none',
             color: activeView === 'Home' ? '#ffffff' : '#6b7280',
             cursor: 'pointer',
-            padding: '0.375rem 0.5rem',
-            gap: '0.25rem',
+            padding: '0.5rem 0.375rem',
+            gap: '0.2rem',
             ...MOBILE_TOUCH,
-            flex: 1
+            flex: 1,
+            transition: 'color 0.2s ease'
           }}
         >
-          <Home size={20} strokeWidth={2} />
-          <span style={{ fontSize: '0.6rem', fontWeight: '500' }}>Home</span>
+          <Home size={18} strokeWidth={2} />
+          <span style={{ fontSize: '0.55rem', fontWeight: '500' }}>Home</span>
         </button>
 
         <button
@@ -1432,21 +1435,22 @@ const App = () => {
             border: 'none',
             color: activeView === 'Reports' ? '#ffffff' : '#6b7280',
             cursor: 'pointer',
-            padding: '0.375rem 0.5rem',
-            gap: '0.25rem',
+            padding: '0.5rem 0.375rem',
+            gap: '0.2rem',
             ...MOBILE_TOUCH,
-            flex: 1
+            flex: 1,
+            transition: 'color 0.2s ease'
           }}
         >
-          <TrendingUp size={20} strokeWidth={2} />
-          <span style={{ fontSize: '0.6rem', fontWeight: '500' }}>Reports</span>
+          <TrendingUp size={18} strokeWidth={2} />
+          <span style={{ fontSize: '0.55rem', fontWeight: '500' }}>Reports</span>
         </button>
 
         <button
           onClick={() => setActiveView(activeView === 'AddIncome' ? 'AddExpense' : 'AddIncome')}
           style={{
-            width: '3rem',
-            height: '3rem',
+            width: '2.75rem',
+            height: '2.75rem',
             borderRadius: '50%',
             background: 'linear-gradient(135deg, #7c7cf5 0%, #9f7cf5 100%)',
             border: 'none',
@@ -1455,12 +1459,13 @@ const App = () => {
             justifyContent: 'center',
             cursor: 'pointer',
             position: 'relative',
-            boxShadow: '0 4px 16px rgba(124, 124, 245, 0.4)',
+            boxShadow: '0 4px 16px rgba(124, 124, 245, 0.5)',
             ...MOBILE_TOUCH,
-            flexShrink: 0
+            flexShrink: 0,
+            transition: 'transform 0.2s ease'
           }}
         >
-          <Plus size={22} color="white" strokeWidth={3} />
+          <Plus size={20} color="white" strokeWidth={2.5} />
         </button>
 
         <button
@@ -1473,14 +1478,15 @@ const App = () => {
             border: 'none',
             color: activeView === 'Recurring' ? '#ffffff' : '#6b7280',
             cursor: 'pointer',
-            padding: '0.375rem 0.5rem',
-            gap: '0.25rem',
+            padding: '0.5rem 0.375rem',
+            gap: '0.2rem',
             ...MOBILE_TOUCH,
-            flex: 1
+            flex: 1,
+            transition: 'color 0.2s ease'
           }}
         >
-          <Calendar size={20} strokeWidth={2} />
-          <span style={{ fontSize: '0.6rem', fontWeight: '500' }}>Bills</span>
+          <Calendar size={18} strokeWidth={2} />
+          <span style={{ fontSize: '0.55rem', fontWeight: '500' }}>Bills</span>
         </button>
 
         <button
@@ -1493,14 +1499,15 @@ const App = () => {
             border: 'none',
             color: activeView === 'AddExpense' ? '#ffffff' : '#6b7280',
             cursor: 'pointer',
-            padding: '0.375rem 0.5rem',
-            gap: '0.25rem',
+            padding: '0.5rem 0.375rem',
+            gap: '0.2rem',
             ...MOBILE_TOUCH,
-            flex: 1
+            flex: 1,
+            transition: 'color 0.2s ease'
           }}
         >
-          <TrendingDown size={20} strokeWidth={2} />
-          <span style={{ fontSize: '0.6rem', fontWeight: '500' }}>Expense</span>
+          <TrendingDown size={18} strokeWidth={2} />
+          <span style={{ fontSize: '0.55rem', fontWeight: '500' }}>Expense</span>
         </button>
       </div>
     </div>
