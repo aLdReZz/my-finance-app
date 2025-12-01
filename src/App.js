@@ -310,8 +310,8 @@ const App = () => {
       const path = type === 'income'
         ? getIncomeCollectionPath(userId)
         : type === 'expense'
-        ? getExpenseCollectionPath(userId)
-        : getRecurringTemplateCollectionPath(userId);
+          ? getExpenseCollectionPath(userId)
+          : getRecurringTemplateCollectionPath(userId);
 
       await deleteDoc(doc(db, path, id));
       console.log('✅ Deleted');
@@ -554,25 +554,25 @@ const App = () => {
             display: 'grid',
             gridTemplateColumns: 'repeat(3, minmax(0, 1fr))',
             flexShrink: 0,
-            backgroundColor: '#1f1f1f',
-            borderRadius: '0.5rem',
-            padding: '0.375rem',
+            backgroundColor: '#18181b',
+            borderRadius: '9999px',
+            padding: '0.25rem',
             position: 'relative',
             minWidth: '190px',
-            gap: '0.5rem'
+            gap: '0.25rem'
           }}>
             {/* Sliding Background */}
             <div style={{
               position: 'absolute',
-              top: '6px',
-              bottom: '6px',
-              left: '6px',
-              width: 'calc((100% - 12px - 1rem) / 3)',
-              backgroundColor: '#723FEB',
-              borderRadius: '0.375rem',
+              top: '4px',
+              bottom: '4px',
+              left: '4px',
+              width: 'calc((100% - 8px - 0.5rem) / 3)',
+              backgroundColor: '#8b5cf6',
+              borderRadius: '9999px',
               boxShadow: '0 1px 2px 0 rgba(0, 0, 0, 0.05)',
               transition: 'transform 0.3s cubic-bezier(0.25, 0.1, 0.25, 1)',
-              transform: `translateX(${duesFilter === 'Monthly' ? '0%' : duesFilter === 'Weekly' ? 'calc(100% + 0.5rem)' : 'calc(200% + 1rem)'})`
+              transform: `translateX(${duesFilter === 'Monthly' ? '0%' : duesFilter === 'Weekly' ? 'calc(100% + 0.25rem)' : 'calc(200% + 0.5rem)'})`
             }}></div>
 
             {['Monthly', 'Weekly', 'Daily'].map(filter => (
@@ -585,7 +585,7 @@ const App = () => {
                   padding: '0.4rem 0',
                   fontSize: '0.65rem',
                   fontWeight: '600',
-                  borderRadius: '0.375rem',
+                  borderRadius: '9999px',
                   backgroundColor: 'transparent',
                   color: duesFilter === filter ? '#FFFFFF' : '#9CA3AF',
                   border: 'none',
