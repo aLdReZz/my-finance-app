@@ -77,7 +77,7 @@ npm start
 
 - ✅ **Income & Expense Tracking** - Track all your financial transactions
 - ✅ **Recurring Bills Management** - Set up monthly bills and track payments
-- ✅ **Budget Dashboard** - View average income/expenses and net worth
+- ✅ **Budget Dash** - View average income/expenses and net worth
 - ✅ **Beautiful UI** - Modern dark theme with smooth animations
 - ✅ **Real-time Sync** - All data syncs instantly with Firebase
 - ✅ **Offline Ready** - Works on mobile devices
