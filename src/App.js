@@ -562,19 +562,19 @@ const App = () => {
             gap: '0.25rem'
           }}>
             {/* Sliding Background */}
-            <div style={{
-              position: 'absolute',
-              top: '4px',
-              bottom: '4px',
-              left: '4px',
-              width: 'calc((100% - 8px - 0.5rem) / 3)',
-              backgroundColor: '#8b5cf6',
-              borderRadius: '0.375rem',
-              boxShadow: '0 1px 2px 0 rgba(0, 0, 0, 0.05)',
-              transition: 'all 0.4s cubic-bezier(0.34, 1.56, 0.64, 1)',
-              willChange: 'transform',
-              transform: `translateX(${duesFilter === 'Monthly' ? '0%' : duesFilter === 'Weekly' ? 'calc(100% + 0.25rem)' : 'calc(200% + 0.5rem)'})`
-            }}></div>
+            <div
+              className="sliding-background"
+              style={{
+                position: 'absolute',
+                top: '4px',
+                bottom: '4px',
+                left: duesFilter === 'Monthly' ? '4px' : duesFilter === 'Weekly' ? 'calc(33.33% + 4px + 0.0833rem)' : 'calc(66.66% + 4px + 0.1666rem)',
+                width: 'calc((100% - 8px - 0.5rem) / 3)',
+                backgroundColor: '#8b5cf6',
+                borderRadius: '0.375rem',
+                boxShadow: '0 1px 2px 0 rgba(0, 0, 0, 0.05)'
+              }}
+            ></div>
 
             {['Monthly', 'Weekly', 'Daily'].map(filter => (
               <button
