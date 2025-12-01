@@ -454,7 +454,7 @@ const App = () => {
   // Render different views
   const renderView = () => {
     if (activeView === 'Home') {
-      return <Dash />;
+      return <Dashboard />;
     } else if (activeView === 'Reports') {
       return <Reports />;
     } else if (activeView === 'AddIncome') {
@@ -466,8 +466,8 @@ const App = () => {
     }
   };
 
-  // Dash Component
-  const Dash = () => (
+  // Dashboard Component
+  const Dashboard = () => (
     <div style={{ padding: '1rem', paddingBottom: '6rem', backgroundColor: THEME.bg, minHeight: '100vh', overflowX: 'hidden' }}>
       <style>{`
         @import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&display=swap');
@@ -487,7 +487,7 @@ const App = () => {
         }
       `}</style>
 
-      <h1 style={{ fontSize: '1.5rem', fontWeight: '800', color: THEME.text, marginBottom: '0.25rem', letterSpacing: '-0.02em' }}>Dash</h1>
+      <h1 style={{ fontSize: '1.5rem', fontWeight: '800', color: THEME.text, marginBottom: '0.25rem', letterSpacing: '-0.02em' }}>Dashboard</h1>
       <p style={{ fontSize: '0.75rem', color: '#a78bfa', marginBottom: '1rem', fontWeight: '400' }}>Welcome back!</p>
 
       {/* Income & Expense Cards */}
