@@ -578,12 +578,13 @@ const App = () => {
             {['Monthly', 'Weekly', 'Daily'].map(filter => (
               <button
                 key={filter}
+                className="filter-button-small"
                 onClick={() => setDuesFilter(filter)}
                 style={{
                   position: 'relative',
                   zIndex: 10,
-                  padding: '0.4rem 0',
-                  fontSize: '0.45rem',
+                  padding: '0.35rem 0',
+                  fontSize: '9px',
                   fontWeight: '600',
                   borderRadius: '9999px',
                   backgroundColor: 'transparent',
