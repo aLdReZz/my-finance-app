@@ -554,8 +554,8 @@ const App = () => {
             display: 'grid',
             gridTemplateColumns: 'repeat(3, minmax(0, 1fr))',
             flexShrink: 0,
-            backgroundColor: '#18181b',
-            borderRadius: '9999px',
+            backgroundColor: '#27272a',
+            borderRadius: '0.5rem',
             padding: '0.25rem',
             position: 'relative',
             minWidth: '220px',
@@ -569,9 +569,10 @@ const App = () => {
               left: '4px',
               width: 'calc((100% - 8px - 0.5rem) / 3)',
               backgroundColor: '#8b5cf6',
-              borderRadius: '9999px',
+              borderRadius: '0.375rem',
               boxShadow: '0 1px 2px 0 rgba(0, 0, 0, 0.05)',
-              transition: 'transform 0.3s cubic-bezier(0.25, 0.1, 0.25, 1)',
+              transition: 'all 0.4s cubic-bezier(0.34, 1.56, 0.64, 1)',
+              willChange: 'transform',
               transform: `translateX(${duesFilter === 'Monthly' ? '0%' : duesFilter === 'Weekly' ? 'calc(100% + 0.25rem)' : 'calc(200% + 0.5rem)'})`
             }}></div>
 
@@ -583,17 +584,19 @@ const App = () => {
                 style={{
                   position: 'relative',
                   zIndex: 10,
-                  padding: '0.35rem 0',
+                  padding: '0.50rem 0',
                   fontSize: '9px',
                   fontWeight: '600',
-                  borderRadius: '9999px',
+                  borderRadius: '0.375rem',
                   backgroundColor: 'transparent',
                   color: duesFilter === filter ? '#FFFFFF' : '#9CA3AF',
                   border: 'none',
                   cursor: 'pointer',
                   transition: 'color 0.2s',
                   whiteSpace: 'nowrap',
-                  ...MOBILE_TOUCH
+                  ...MOBILE_TOUCH,
+                  minHeight: 'auto',
+                  minWidth: 'auto'
                 }}
               >
                 {filter}
