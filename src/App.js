@@ -583,7 +583,7 @@ const App = () => {
                   position: 'relative',
                   zIndex: 10,
                   padding: '0.4rem 0',
-                  fontSize: '0.55rem',
+                  fontSize: '0.5rem',
                   fontWeight: '600',
                   borderRadius: '9999px',
                   backgroundColor: 'transparent',
