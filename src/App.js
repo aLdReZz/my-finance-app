@@ -617,32 +617,32 @@ const App = () => {
         {/* Total Dues Card */}
         <div style={{
           backgroundColor: '#27272a',
-          borderRadius: '1rem',
-          padding: '1rem',
+          borderRadius: '0.75rem',
+          padding: '0.75rem',
           textAlign: 'center',
-          marginBottom: '0.75rem',
+          marginBottom: '0.5rem',
           border: '1px solid rgba(255,255,255,0.05)'
         }}>
-          <p style={{ fontSize: '0.7rem', color: '#9ca3af', marginBottom: '0.375rem', fontWeight: '500' }}>Total {duesFilter} Dues</p>
-          <p style={{ fontSize: '2rem', fontWeight: '900', color: '#67e8f9', marginBottom: '0.75rem', letterSpacing: '-0.03em' }}>
+          <p style={{ fontSize: '0.6rem', color: '#9ca3af', marginBottom: '0.25rem', fontWeight: '500' }}>Total {duesFilter} Dues</p>
+          <p style={{ fontSize: '1.5rem', fontWeight: '900', color: '#67e8f9', marginBottom: '0.5rem', letterSpacing: '-0.03em' }}>
             <AnimatedCounter value={totalMonthlyDues} />
           </p>
 
           <div style={{
             backgroundColor: '#1f1f1f',
-            borderRadius: '0.75rem',
-            padding: '0.75rem',
+            borderRadius: '0.5rem',
+            padding: '0.5rem',
           }}>
-            <div style={{ display: 'flex', justifyContent: 'space-between', marginBottom: '0.5rem', gap: '0.5rem' }}>
+            <div style={{ display: 'flex', justifyContent: 'space-between', marginBottom: '0.375rem', gap: '0.5rem' }}>
               <div style={{ flex: '1', minWidth: '0' }}>
-                <p style={{ fontSize: '0.6rem', textTransform: 'uppercase', color: '#6b7280', fontWeight: '700', letterSpacing: '0.05em' }}>REMAINING</p>
-                <p style={{ fontSize: '1.125rem', fontWeight: '800', color: '#ef4444', marginTop: '0.25rem' }}>
+                <p style={{ fontSize: '0.55rem', textTransform: 'uppercase', color: '#6b7280', fontWeight: '700', letterSpacing: '0.05em' }}>REMAINING</p>
+                <p style={{ fontSize: '0.9rem', fontWeight: '800', color: '#ef4444', marginTop: '0.125rem' }}>
                   <AnimatedCounter value={remainingToPay} />
                 </p>
               </div>
               <div style={{ textAlign: 'right', flex: '1', minWidth: '0' }}>
-                <p style={{ fontSize: '0.6rem', color: '#6b7280', fontWeight: '700', textTransform: 'uppercase', letterSpacing: '0.05em' }}>PAID</p>
-                <p style={{ fontSize: '1.125rem', fontWeight: '800', color: '#22c55e', marginTop: '0.25rem' }}>
+                <p style={{ fontSize: '0.55rem', color: '#6b7280', fontWeight: '700', textTransform: 'uppercase', letterSpacing: '0.05em' }}>PAID</p>
+                <p style={{ fontSize: '0.9rem', fontWeight: '800', color: '#22c55e', marginTop: '0.125rem' }}>
                   <AnimatedCounter value={getPaidAmount} />
                 </p>
               </div>
@@ -650,7 +650,7 @@ const App = () => {
 
             {/* Progress Bar */}
             <div style={{
-              height: '8px',
+              height: '6px',
               backgroundColor: '#27272a',
               borderRadius: '9999px',
               overflow: 'hidden',
@@ -695,10 +695,10 @@ const App = () => {
                   display: 'flex',
                   justifyContent: 'space-between',
                   alignItems: 'center',
-                  padding: '0.75rem',
+                  padding: '0.5rem',
                   backgroundColor: '#27272a',
-                  borderRadius: '0.75rem',
-                  marginBottom: '0.5rem',
+                  borderRadius: '0.5rem',
+                  marginBottom: '0.375rem',
                   borderLeft: `3px solid ${isPaid ? '#22c55e' : '#6366f1'}`,
                   border: '1px solid rgba(255,255,255,0.05)',
                   borderLeftWidth: '3px',
@@ -706,18 +706,18 @@ const App = () => {
                   gap: '0.5rem'
                 }}>
                   <div style={{ flex: '1', minWidth: '0' }}>
-                    <p style={{ fontWeight: '700', color: THEME.text, marginBottom: '0.125rem', fontSize: '0.8rem', overflow: 'hidden', textOverflow: 'ellipsis', whiteSpace: 'nowrap' }}>{bill.name}</p>
-                    <p style={{ fontSize: '0.65rem', color: '#9ca3af', fontWeight: '500' }}>Due on the {dueDay}th</p>
+                    <p style={{ fontWeight: '700', color: THEME.text, marginBottom: '0.0625rem', fontSize: '0.75rem', overflow: 'hidden', textOverflow: 'ellipsis', whiteSpace: 'nowrap' }}>{bill.name}</p>
+                    <p style={{ fontSize: '0.6rem', color: '#9ca3af', fontWeight: '500' }}>Due on the {dueDay}th</p>
                   </div>
                   <div style={{ textAlign: 'right', flexShrink: 0 }}>
-                    <p style={{ fontWeight: '800', color: THEME.text, fontSize: '0.875rem', marginBottom: '0.125rem', whiteSpace: 'nowrap' }}>{formatCurrency(bill.amount)}</p>
+                    <p style={{ fontWeight: '800', color: THEME.text, fontSize: '0.8rem', marginBottom: '0.0625rem', whiteSpace: 'nowrap' }}>{formatCurrency(bill.amount)}</p>
                     {isPaid ? (
-                      <span style={{ fontSize: '0.65rem', color: '#22c55e', fontWeight: '600' }}>Paid</span>
+                      <span style={{ fontSize: '0.6rem', color: '#22c55e', fontWeight: '600' }}>Paid</span>
                     ) : (
                       <button
                         onClick={() => handleMarkPaid(bill)}
                         style={{
-                          fontSize: '0.65rem',
+                          fontSize: '0.6rem',
                           fontWeight: '600',
                           backgroundColor: 'transparent',
                           color: '#9ca3af',
