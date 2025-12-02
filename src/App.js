@@ -682,7 +682,7 @@ const App = () => {
           </div>
 
           {filteredDues.length > 0 ? (
-            filteredDues.slice(0, 3).map(bill => {
+            filteredDues.map(bill => {
               const currentMonthYear = formatMonthYear(new Date());
               const isPaid = expenses.some(exp =>
                 exp.recurringTemplateId === bill.id &&
