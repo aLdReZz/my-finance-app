@@ -618,31 +618,31 @@ const App = () => {
         <div style={{
           backgroundColor: '#27272a',
           borderRadius: '0.75rem',
-          padding: '0.75rem',
+          padding: '0.625rem',
           textAlign: 'center',
           marginBottom: '0.5rem',
           border: '1px solid rgba(255,255,255,0.05)'
         }}>
-          <p style={{ fontSize: '0.6rem', color: '#9ca3af', marginBottom: '0.25rem', fontWeight: '500' }}>Total {duesFilter} Dues</p>
-          <p style={{ fontSize: '1.5rem', fontWeight: '900', color: '#67e8f9', marginBottom: '0.5rem', letterSpacing: '-0.03em' }}>
+          <p style={{ fontSize: '0.55rem', color: '#9ca3af', marginBottom: '0.2rem', fontWeight: '500' }}>Total {duesFilter} Dues</p>
+          <p style={{ fontSize: '1.35rem', fontWeight: '900', color: '#67e8f9', marginBottom: '0.4rem', letterSpacing: '-0.03em' }}>
             <AnimatedCounter value={totalMonthlyDues} />
           </p>
 
           <div style={{
             backgroundColor: '#1f1f1f',
             borderRadius: '0.5rem',
-            padding: '0.5rem',
+            padding: '0.4rem',
           }}>
-            <div style={{ display: 'flex', justifyContent: 'space-between', marginBottom: '0.375rem', gap: '0.5rem' }}>
-              <div style={{ flex: '1', minWidth: '0' }}>
-                <p style={{ fontSize: '0.55rem', textTransform: 'uppercase', color: '#6b7280', fontWeight: '700', letterSpacing: '0.05em' }}>REMAINING</p>
-                <p style={{ fontSize: '0.9rem', fontWeight: '800', color: '#ef4444', marginTop: '0.125rem' }}>
+            <div style={{ display: 'flex', justifyContent: 'space-between', marginBottom: '0.3rem', gap: '0.5rem' }}>
+              <div style={{ flex: '1', minWidth: '0', textAlign: 'center' }}>
+                <p style={{ fontSize: '0.5rem', textTransform: 'uppercase', color: '#6b7280', fontWeight: '700', letterSpacing: '0.05em' }}>REMAINING</p>
+                <p style={{ fontSize: '0.85rem', fontWeight: '800', color: '#ef4444', marginTop: '0.1rem' }}>
                   <AnimatedCounter value={remainingToPay} />
                 </p>
               </div>
-              <div style={{ textAlign: 'right', flex: '1', minWidth: '0' }}>
-                <p style={{ fontSize: '0.55rem', color: '#6b7280', fontWeight: '700', textTransform: 'uppercase', letterSpacing: '0.05em' }}>PAID</p>
-                <p style={{ fontSize: '0.9rem', fontWeight: '800', color: '#22c55e', marginTop: '0.125rem' }}>
+              <div style={{ textAlign: 'center', flex: '1', minWidth: '0' }}>
+                <p style={{ fontSize: '0.5rem', color: '#6b7280', fontWeight: '700', textTransform: 'uppercase', letterSpacing: '0.05em' }}>PAID</p>
+                <p style={{ fontSize: '0.85rem', fontWeight: '800', color: '#22c55e', marginTop: '0.1rem' }}>
                   <AnimatedCounter value={getPaidAmount} />
                 </p>
               </div>
