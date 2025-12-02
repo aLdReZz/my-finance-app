@@ -695,10 +695,10 @@ const App = () => {
                   display: 'flex',
                   justifyContent: 'space-between',
                   alignItems: 'center',
-                  padding: '0.35rem',
+                  padding: '0.25rem',
                   backgroundColor: '#27272a',
                   borderRadius: '0.5rem',
-                  marginBottom: '0.375rem',
+                  marginBottom: '0.25rem',
                   borderLeft: `3px solid ${isPaid ? '#22c55e' : '#6366f1'}`,
                   border: '1px solid rgba(255,255,255,0.05)',
                   borderLeftWidth: '3px',
@@ -706,7 +706,7 @@ const App = () => {
                   gap: '0.5rem'
                 }}>
                   <div style={{ flex: '1', minWidth: '0' }}>
-                    <p style={{ fontWeight: '700', color: THEME.text, marginBottom: '0.0625rem', fontSize: '0.75rem', overflow: 'hidden', textOverflow: 'ellipsis', whiteSpace: 'nowrap' }}>{bill.name}</p>
+                    <p style={{ fontWeight: '700', color: THEME.text, marginBottom: '0', fontSize: '0.75rem', overflow: 'hidden', textOverflow: 'ellipsis', whiteSpace: 'nowrap' }}>{bill.name}</p>
                     <p style={{ fontSize: '0.6rem', color: '#9ca3af', fontWeight: '500' }}>Due on the {dueDay}th</p>
                   </div>
                   <div style={{ textAlign: 'right', flexShrink: 0 }}>
