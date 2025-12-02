@@ -731,8 +731,7 @@ const App = () => {
                           color: '#9ca3af',
                           border: 'none',
                           padding: '0.125rem',
-                          cursor: 'pointer',
-                          ...MOBILE_TOUCH
+                          cursor: 'pointer'
                         }}
                       >
                         Mark Paid
