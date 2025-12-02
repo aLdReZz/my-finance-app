@@ -618,7 +618,7 @@ const App = () => {
         <div style={{
           backgroundColor: '#27272a',
           borderRadius: '0.75rem',
-          padding: '0.625rem',
+          padding: '0.85rem',
           textAlign: 'center',
           marginBottom: '0.5rem',
           border: '1px solid rgba(255,255,255,0.05)'
