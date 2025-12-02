@@ -707,56 +707,235 @@ const App = () => {
                 }}>
                   <div style={{ flex: '1', minWidth: '0' }}>
                     <p style={{ fontWeight: '700', color: THEME.text, marginBottom: '0', fontSize: '0.75rem', overflow: 'hidden', textOverflow: 'ellipsis', whiteSpace: 'nowrap' }}>{bill.name}</p>
-                    <p style={{ fontSize: '0.6rem', color: '#9ca3af', fontWeight: '500' }}>Due on the {dueDay}th</p>
-                  </div>
-                  <div style={{ textAlign: 'right', flexShrink: 0 }}>
-                    <p style={{ fontWeight: '800', color: THEME.text, fontSize: '0.8rem', marginBottom: '0.0625rem', whiteSpace: 'nowrap' }}>{formatCurrency(bill.amount)}</p>
-                    {isPaid ? (
-                      <span style={{
-                        fontSize: '0.6rem',
-                        color: '#22c55e',
-                        fontWeight: '600',
-                        backgroundColor: 'transparent',
-                        border: 'none',
-                        padding: '0.125rem',
-                        display: 'inline-block'
-                      }}>Paid</span>
-                    ) : (
-                      <button
-                        onClick={() => handleMarkPaid(bill)}
-                        style={{
-                          fontSize: '0.6rem',
-                          fontWeight: '600',
-                          backgroundColor: 'transparent',
-                          color: '#9ca3af',
-                          border: 'none',
-                          padding: '0.125rem',
-                          cursor: 'pointer',
-                          ...MOBILE_TOUCH
+                    cursor: 'pointer',
+                    ...MOBILE_TOUCH
                         }}
                       >
-                        Mark Paid
-                      </button>
+                    Mark Paid
+                  </button>
                     )}
-                  </div>
                 </div>
-              );
+                </div>
+        );
             })
-          ) : (
-            <p style={{ textAlign: 'center', color: THEME.textMuted, padding: '1rem' }}>No bills set up yet</p>
+        ) : (
+        <p style={{ textAlign: 'center', color: THEME.textMuted, padding: '1rem' }}>No bills set up yet</p>
           )}
-        </div>
       </div>
     </div>
+    </div >
   );
 
-  // Reports Component
-  const Reports = () => (
+// Reports Component
+const Reports = () => (
+  <div style={{ padding: '1rem', paddingBottom: '6rem', backgroundColor: THEME.bg, minHeight: '100vh', overflowX: 'hidden' }}>
+    <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: '1.25rem' }}>
+      <div>
+        <h1 style={{ fontSize: '1.5rem', fontWeight: 'bold', color: THEME.text, marginBottom: '0.25rem' }}>Reports</h1>
+        <p style={{ fontSize: '0.8rem', color: THEME.textMuted }}>Welcome back!</p>
+      </div>
+      <button
+        onClick={() => setActiveView('Home')}
+        style={{
+          width: '2.5rem',
+          height: '2.5rem',
+          borderRadius: '0.5rem',
+          backgroundColor: THEME.card,
+          border: 'none',
+          cursor: 'pointer',
+          display: 'flex',
+          alignItems: 'center',
+          justifyContent: 'center'
+        }}
+      >
+        <Home size={20} color={THEME.text} />
+      </button>
+    </div>
+
+    {/* View Toggle */}
+    <div style={{ display: 'flex', gap: '0.5rem', marginBottom: '1.5rem', backgroundColor: THEME.card, padding: '0.25rem', borderRadius: '0.75rem' }}>
+      {['Monthly', 'Weekly', 'Daily'].map(view => (
+        <button
+          key={view}
+          onClick={() => setReportView(view)}
+          style={{
+            flex: 1,
+            padding: '0.75rem',
+            borderRadius: '0.5rem',
+            fontSize: '0.875rem',
+            fontWeight: '600',
+            backgroundColor: reportView === view ? THEME.primary : 'transparent',
+            color: THEME.text,
+            border: 'none',
+            cursor: 'pointer',
+            ...MOBILE_TOUCH
+          }}
+        >
+          {view}
+        </button>
+      ))}
+    </div>
+
+    {/* Date Navigation */}
+    <div style={{
+      display: 'flex',
+      justifyContent: 'space-between',
+      alignItems: 'center',
+      marginBottom: '1.5rem',
+      padding: '1rem',
+      backgroundColor: THEME.card,
+      borderRadius: '0.75rem'
+    }}>
+      <button style={{ background: 'none', border: 'none', cursor: 'pointer' }}>
+        <svg width="24" height="24" fill="none" stroke={THEME.text} strokeWidth="2">
+          <path d="M15 18l-6-6 6-6" />
+        </svg>
+      </button>
+      <span style={{ fontSize: '1.125rem', fontWeight: 'bold', color: THEME.text }}>
+        November 2025
+      </span>
+      <button style={{ background: 'none', border: 'none', cursor: 'pointer' }}>
+        <svg width="24" height="24" fill="none" stroke={THEME.text} strokeWidth="2">
+          <path d="M9 18l6-6-6-6" />
+        </svg>
+      </button>
+    </div>
+
+    {/* Total Cards */}
+    <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: '1rem', marginBottom: '1.5rem' }}>
+      <div style={{
+        background: 'linear-gradient(135deg, #065f46 0%, #047857 100%)',
+        borderRadius: '0.75rem',
+        padding: '1.25rem'
+      }}>
+        <p style={{ fontSize: '0.75rem', color: '#a7f3d0', fontWeight: 'bold', marginBottom: '0.5rem' }}>Total Income</p>
+        <p style={{ fontSize: '1.5rem', fontWeight: 'bold', color: 'white' }}>
+          <AnimatedCounter value={filteredTransactions.totalIncome} />
+        </p>
+      </div>
+
+      <div style={{
+        background: 'linear-gradient(135deg, #7f1d1d 0%, #991b1b 100%)',
+        borderRadius: '0.75rem',
+        padding: '1.25rem'
+      }}>
+        <p style={{ fontSize: '0.75rem', color: '#fca5a5', fontWeight: 'bold', marginBottom: '0.5rem' }}>Total Expenses</p>
+        <p style={{ fontSize: '1.5rem', fontWeight: 'bold', color: 'white' }}>
+          <AnimatedCounter value={filteredTransactions.totalExpense} />
+        </p>
+      </div>
+    </div>
+
+    {/* Net Cash Flow */}
+    <div style={{
+      backgroundColor: THEME.card,
+      borderRadius: '0.75rem',
+      padding: '1.5rem',
+      textAlign: 'center',
+      marginBottom: '1.5rem'
+    }}>
+      <p style={{ fontSize: '0.875rem', color: THEME.textMuted, marginBottom: '0.5rem' }}>Net Cash Flow</p>
+      <p style={{
+        fontSize: '2.5rem',
+        fontWeight: 'bold',
+        color: filteredTransactions.netCashflow >= 0 ? THEME.green : THEME.danger
+      }}>
+        {filteredTransactions.netCashflow > 0 ? '+' : ''}
+        <AnimatedCounter value={filteredTransactions.netCashflow} />
+      </p>
+    </div>
+
+    {/* History */}
+    <h3 style={{ fontSize: '1rem', fontWeight: 'bold', color: THEME.text, marginBottom: '1rem' }}>History</h3>
+    {[...filteredTransactions.incomes, ...filteredTransactions.expenses]
+      .sort((a, b) => b.date - a.date)
+      .map(t => {
+        const isIncome = !!t.clientName;
+        return (
+          <div key={t.id} style={{
+            display: 'flex',
+            justifyContent: 'space-between',
+            alignItems: 'center',
+            padding: '1rem',
+            backgroundColor: THEME.card,
+            borderRadius: '0.75rem',
+            marginBottom: '0.75rem'
+          }}>
+            <div style={{ display: 'flex', alignItems: 'center', gap: '1rem' }}>
+              <div style={{
+                width: '2.5rem',
+                height: '2.5rem',
+                borderRadius: '0.5rem',
+                backgroundColor: isIncome ? 'rgba(16, 185, 129, 0.1)' : 'rgba(239, 68, 68, 0.1)',
+                display: 'flex',
+                alignItems: 'center',
+                justifyContent: 'center'
+              }}>
+                {isIncome ? <TrendingUp size={20} color={THEME.green} /> : <TrendingDown size={20} color={THEME.danger} />}
+              </div>
+              <div>
+                <p style={{ fontWeight: '600', color: THEME.text, marginBottom: '0.25rem' }}>
+                  {isIncome ? t.clientName : t.name}
+                </p>
+                <p style={{ fontSize: '0.75rem', color: THEME.textMuted }}>
+                  {formatDate(t.date)} • {isIncome ? t.type : t.category}
+                </p>
+              </div>
+            </div>
+            <div style={{ textAlign: 'right' }}>
+              <p style={{
+                fontWeight: 'bold',
+                fontSize: '1.125rem',
+                color: isIncome ? THEME.green : THEME.text
+              }}>
+                {isIncome ? '+' : '-'}{formatCurrency(t.amount)}
+              </p>
+              <button
+                onClick={() => handleDelete(isIncome ? 'income' : 'expense', t.id)}
+                style={{
+                  fontSize: '0.75rem',
+                  color: THEME.textMuted,
+                  background: 'none',
+                  border: 'none',
+                  cursor: 'pointer',
+                  marginTop: '0.25rem',
+                  padding: '0.5rem',
+                  ...MOBILE_TOUCH
+                }}
+              >
+                Delete
+              </button>
+            </div>
+          </div>
+        );
+      })}
+  </div>
+);
+
+// Add Income Component
+const AddIncome = () => {
+  const [formData, setFormData] = useState({
+    clientName: '',
+    amount: '',
+    date: new Date().toISOString().substring(0, 10),
+    type: INCOME_TYPES[0].value
+  });
+
+  const handleSubmit = (e) => {
+    e.preventDefault();
+    if (!formData.clientName || !formData.amount) {
+      alert('Please fill in all required fields');
+      return;
+    }
+    handleAddIncome(formData);
+  };
+
+  return (
     <div style={{ padding: '1rem', paddingBottom: '6rem', backgroundColor: THEME.bg, minHeight: '100vh', overflowX: 'hidden' }}>
       <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: '1.25rem' }}>
         <div>
-          <h1 style={{ fontSize: '1.5rem', fontWeight: 'bold', color: THEME.text, marginBottom: '0.25rem' }}>Reports</h1>
-          <p style={{ fontSize: '0.8rem', color: THEME.textMuted }}>Welcome back!</p>
+          <h1 style={{ fontSize: '1.5rem', fontWeight: 'bold', color: THEME.text, marginBottom: '0.25rem' }}>Add Income</h1>
+          <p style={{ fontSize: '0.8rem', color: THEME.textMuted }}>Track your earnings</p>
         </div>
         <button
           onClick={() => setActiveView('Home')}
@@ -776,107 +955,197 @@ const App = () => {
         </button>
       </div>
 
-      {/* View Toggle */}
-      <div style={{ display: 'flex', gap: '0.5rem', marginBottom: '1.5rem', backgroundColor: THEME.card, padding: '0.25rem', borderRadius: '0.75rem' }}>
-        {['Monthly', 'Weekly', 'Daily'].map(view => (
-          <button
-            key={view}
-            onClick={() => setReportView(view)}
+      <form onSubmit={handleSubmit}>
+        <div style={{ marginBottom: '1.5rem' }}>
+          <label style={{ display: 'block', fontSize: '0.875rem', color: THEME.textMuted, marginBottom: '0.5rem' }}>
+            Client / Source
+          </label>
+          <input
+            type="text"
+            value={formData.clientName}
+            onChange={(e) => setFormData({ ...formData, clientName: e.target.value })}
+            placeholder="e.g. Google Project"
             style={{
-              flex: 1,
-              padding: '0.75rem',
-              borderRadius: '0.5rem',
-              fontSize: '0.875rem',
-              fontWeight: '600',
-              backgroundColor: reportView === view ? THEME.primary : 'transparent',
-              color: THEME.text,
+              width: '100%',
+              padding: '1rem',
+              borderRadius: '0.75rem',
+              backgroundColor: THEME.card,
               border: 'none',
+              color: THEME.text,
+              ...MOBILE_INPUT
+            }}
+            required
+          />
+        </div>
+
+        <div style={{ marginBottom: '1.5rem' }}>
+          <label style={{ display: 'block', fontSize: '0.875rem', color: THEME.textMuted, marginBottom: '0.5rem' }}>
+            Type
+          </label>
+          <select
+            value={formData.type}
+            onChange={(e) => setFormData({ ...formData, type: e.target.value })}
+            style={{
+              width: '100%',
+              padding: '1rem',
+              borderRadius: '0.75rem',
+              backgroundColor: THEME.card,
+              border: 'none',
+              color: THEME.text,
               cursor: 'pointer',
-              ...MOBILE_TOUCH
+              ...MOBILE_INPUT
             }}
           >
-            {view}
-          </button>
-        ))}
+            {INCOME_TYPES.map(opt => (
+              <option key={opt.value} value={opt.value}>{opt.label}</option>
+            ))}
+          </select>
+        </div>
+
+        <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: '1rem', marginBottom: '2rem' }}>
+          <div>
+            <label style={{ display: 'block', fontSize: '0.875rem', color: THEME.textMuted, marginBottom: '0.5rem' }}>
+              Amount
+            </label>
+            <input
+              type="number"
+              value={formData.amount}
+              onChange={(e) => setFormData({ ...formData, amount: e.target.value })}
+              style={{
+                width: '100%',
+                padding: '1rem',
+                borderRadius: '0.75rem',
+                backgroundColor: THEME.card,
+                border: 'none',
+                color: THEME.text,
+                ...MOBILE_INPUT
+              }}
+              step="0.01"
+              required
+            />
+          </div>
+
+          <div>
+            <label style={{ display: 'block', fontSize: '0.875rem', color: THEME.textMuted, marginBottom: '0.5rem' }}>
+              Date
+            </label>
+            <input
+              type="date"
+              value={formData.date}
+              onChange={(e) => setFormData({ ...formData, date: e.target.value })}
+              style={{
+                width: '100%',
+                padding: '1rem',
+                borderRadius: '0.75rem',
+                backgroundColor: THEME.card,
+                border: 'none',
+                color: THEME.text,
+                ...MOBILE_INPUT
+              }}
+              required
+            />
+          </div>
+        </div>
+
+        <button
+          type="submit"
+          style={{
+            width: '100%',
+            padding: '1rem',
+            borderRadius: '0.75rem',
+            background: `linear-gradient(135deg, ${THEME.primary} 0%, ${THEME.purple} 100%)`,
+            border: 'none',
+            color: 'white',
+            fontSize: '1.125rem',
+            fontWeight: 'bold',
+            cursor: 'pointer',
+            boxShadow: `0 4px 12px ${THEME.primary}50`,
+            ...MOBILE_TOUCH
+          }}
+        >
+          Save Income
+        </button>
+      </form>
+    </div>
+  );
+};
+
+// Recurring Bills Component
+const RecurringBills = () => {
+  const currentMonthYear = formatMonthYear(new Date());
+
+  return (
+    <div style={{ padding: '1rem', paddingBottom: '6rem', backgroundColor: THEME.bg, minHeight: '100vh', overflowX: 'hidden' }}>
+      <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: '1.25rem' }}>
+        <div>
+          <h1 style={{ fontSize: '1.5rem', fontWeight: 'bold', color: THEME.text, marginBottom: '0.25rem' }}>Recurring Bills</h1>
+          <p style={{ fontSize: '0.8rem', color: THEME.textMuted }}>Manage your bills</p>
+        </div>
+        <button
+          onClick={() => setActiveView('Home')}
+          style={{
+            width: '2.5rem',
+            height: '2.5rem',
+            borderRadius: '0.5rem',
+            backgroundColor: THEME.card,
+            border: 'none',
+            cursor: 'pointer',
+            display: 'flex',
+            alignItems: 'center',
+            justifyContent: 'center'
+          }}
+        >
+          <Home size={20} color={THEME.text} />
+        </button>
       </div>
 
-      {/* Date Navigation */}
+      {/* Monthly Bills Header */}
       <div style={{
+        background: `linear-gradient(135deg, ${THEME.primary} 0%, ${THEME.purple} 100%)`,
+        borderRadius: '1rem',
+        padding: '1.5rem',
+        marginBottom: '1.5rem',
         display: 'flex',
         justifyContent: 'space-between',
-        alignItems: 'center',
-        marginBottom: '1.5rem',
-        padding: '1rem',
-        backgroundColor: THEME.card,
-        borderRadius: '0.75rem'
+        alignItems: 'center'
       }}>
-        <button style={{ background: 'none', border: 'none', cursor: 'pointer' }}>
-          <svg width="24" height="24" fill="none" stroke={THEME.text} strokeWidth="2">
-            <path d="M15 18l-6-6 6-6" />
-          </svg>
-        </button>
-        <span style={{ fontSize: '1.125rem', fontWeight: 'bold', color: THEME.text }}>
-          November 2025
-        </span>
-        <button style={{ background: 'none', border: 'none', cursor: 'pointer' }}>
-          <svg width="24" height="24" fill="none" stroke={THEME.text} strokeWidth="2">
-            <path d="M9 18l6-6-6-6" />
-          </svg>
-        </button>
-      </div>
-
-      {/* Total Cards */}
-      <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: '1rem', marginBottom: '1.5rem' }}>
-        <div style={{
-          background: 'linear-gradient(135deg, #065f46 0%, #047857 100%)',
-          borderRadius: '0.75rem',
-          padding: '1.25rem'
-        }}>
-          <p style={{ fontSize: '0.75rem', color: '#a7f3d0', fontWeight: 'bold', marginBottom: '0.5rem' }}>Total Income</p>
-          <p style={{ fontSize: '1.5rem', fontWeight: 'bold', color: 'white' }}>
-            <AnimatedCounter value={filteredTransactions.totalIncome} />
-          </p>
+        <div>
+          <h2 style={{ fontSize: '1.5rem', fontWeight: 'bold', color: 'white', marginBottom: '0.25rem' }}>Monthly Bills</h2>
+          <p style={{ fontSize: '0.875rem', color: 'rgba(255,255,255,0.7)' }}>{currentMonthYear}</p>
         </div>
+        <Calendar size={32} color="white" />
+      </div>
 
-        <div style={{
-          background: 'linear-gradient(135deg, #7f1d1d 0%, #991b1b 100%)',
+      {/* Add New Button */}
+      <button
+        onClick={() => setActiveView('AddExpense')}
+        style={{
+          width: '100%',
+          padding: '1rem',
           borderRadius: '0.75rem',
-          padding: '1.25rem'
-        }}>
-          <p style={{ fontSize: '0.75rem', color: '#fca5a5', fontWeight: 'bold', marginBottom: '0.5rem' }}>Total Expenses</p>
-          <p style={{ fontSize: '1.5rem', fontWeight: 'bold', color: 'white' }}>
-            <AnimatedCounter value={filteredTransactions.totalExpense} />
-          </p>
-        </div>
-      </div>
+          backgroundColor: 'transparent',
+          border: '2px dashed #4b5563',
+          color: THEME.textMuted,
+          fontSize: '0.875rem',
+          fontWeight: '600',
+          cursor: 'pointer',
+          marginBottom: '1.5rem'
+        }}
+      >
+        + Add New Recurring Bill
+      </button>
 
-      {/* Net Cash Flow */}
-      <div style={{
-        backgroundColor: THEME.card,
-        borderRadius: '0.75rem',
-        padding: '1.5rem',
-        textAlign: 'center',
-        marginBottom: '1.5rem'
-      }}>
-        <p style={{ fontSize: '0.875rem', color: THEME.textMuted, marginBottom: '0.5rem' }}>Net Cash Flow</p>
-        <p style={{
-          fontSize: '2.5rem',
-          fontWeight: 'bold',
-          color: filteredTransactions.netCashflow >= 0 ? THEME.green : THEME.danger
-        }}>
-          {filteredTransactions.netCashflow > 0 ? '+' : ''}
-          <AnimatedCounter value={filteredTransactions.netCashflow} />
-        </p>
-      </div>
+      {/* Bills List */}
+      {recurringTemplates.length > 0 ? (
+        recurringTemplates.map(bill => {
+          const isPaid = expenses.some(exp =>
+            exp.recurringTemplateId === bill.id &&
+            formatMonthYear(exp.date) === currentMonthYear
+          );
+          const dueDay = bill.dueDay || (bill.createdAt ? bill.createdAt.getDate() : 1);
 
-      {/* History */}
-      <h3 style={{ fontSize: '1rem', fontWeight: 'bold', color: THEME.text, marginBottom: '1rem' }}>History</h3>
-      {[...filteredTransactions.incomes, ...filteredTransactions.expenses]
-        .sort((a, b) => b.date - a.date)
-        .map(t => {
-          const isIncome = !!t.clientName;
           return (
-            <div key={t.id} style={{
+            <div key={bill.id} style={{
               display: 'flex',
               justifyContent: 'space-between',
               alignItems: 'center',
@@ -890,105 +1159,189 @@ const App = () => {
                   width: '2.5rem',
                   height: '2.5rem',
                   borderRadius: '0.5rem',
-                  backgroundColor: isIncome ? 'rgba(16, 185, 129, 0.1)' : 'rgba(239, 68, 68, 0.1)',
+                  backgroundColor: isPaid ? 'rgba(16, 185, 129, 0.2)' : 'rgba(75, 85, 99, 0.2)',
                   display: 'flex',
                   alignItems: 'center',
                   justifyContent: 'center'
                 }}>
-                  {isIncome ? <TrendingUp size={20} color={THEME.green} /> : <TrendingDown size={20} color={THEME.danger} />}
+                  {isPaid ? <CheckCircle size={20} color={THEME.green} /> : <DollarSign size={20} color={THEME.textMuted} />}
                 </div>
                 <div>
-                  <p style={{ fontWeight: '600', color: THEME.text, marginBottom: '0.25rem' }}>
-                    {isIncome ? t.clientName : t.name}
-                  </p>
+                  <p style={{ fontWeight: '600', color: THEME.text, marginBottom: '0.25rem' }}>{bill.name}</p>
                   <p style={{ fontSize: '0.75rem', color: THEME.textMuted }}>
-                    {formatDate(t.date)} • {isIncome ? t.type : t.category}
+                    Due: {dueDay}th • {formatCurrency(bill.amount)}
                   </p>
                 </div>
               </div>
-              <div style={{ textAlign: 'right' }}>
-                <p style={{
-                  fontWeight: 'bold',
-                  fontSize: '1.125rem',
-                  color: isIncome ? THEME.green : THEME.text
-                }}>
-                  {isIncome ? '+' : '-'}{formatCurrency(t.amount)}
-                </p>
+
+              {!isPaid ? (
                 <button
-                  onClick={() => handleDelete(isIncome ? 'income' : 'expense', t.id)}
+                  onClick={() => handleMarkPaid(bill)}
                   style={{
-                    fontSize: '0.75rem',
-                    color: THEME.textMuted,
-                    background: 'none',
+                    padding: '0.5rem 1rem',
+                    borderRadius: '0.5rem',
+                    backgroundColor: 'white',
+                    color: 'black',
                     border: 'none',
+                    fontSize: '0.75rem',
+                    fontWeight: 'bold',
                     cursor: 'pointer',
-                    marginTop: '0.25rem',
-                    padding: '0.5rem',
                     ...MOBILE_TOUCH
                   }}
                 >
-                  Delete
+                  Pay
                 </button>
-              </div>
+              ) : (
+                <button
+                  onClick={() => handleDelete('template', bill.id)}
+                  style={{
+                    padding: '0.5rem',
+                    backgroundColor: 'transparent',
+                    border: 'none',
+                    cursor: 'pointer',
+                    ...MOBILE_TOUCH
+                  }}
+                >
+                  <XCircle size={18} color={THEME.textMuted} />
+                </button>
+              )}
             </div>
           );
-        })}
+        })
+      ) : (
+        <p style={{ textAlign: 'center', color: THEME.textMuted, padding: '3rem' }}>No bills set up.</p>
+      )}
     </div>
   );
+};
 
-  // Add Income Component
-  const AddIncome = () => {
-    const [formData, setFormData] = useState({
-      clientName: '',
-      amount: '',
-      date: new Date().toISOString().substring(0, 10),
-      type: INCOME_TYPES[0].value
-    });
+// Add Expense Component
+const AddExpense = () => {
+  const [formData, setFormData] = useState({
+    name: '',
+    amount: '',
+    date: new Date().toISOString().substring(0, 10),
+    category: EXPENSE_CATEGORIES[0],
+    isRecurring: false,
+    frequency: 'Monthly'
+  });
 
-    const handleSubmit = (e) => {
-      e.preventDefault();
-      if (!formData.clientName || !formData.amount) {
-        alert('Please fill in all required fields');
-        return;
-      }
-      handleAddIncome(formData);
-    };
+  const handleSubmit = (e) => {
+    e.preventDefault();
+    if (!formData.name || !formData.amount) {
+      alert('Please fill in all required fields');
+      return;
+    }
+    if (formData.isRecurring) {
+      handleAddRecurringTemplate(formData);
+    } else {
+      handleAddExpense(formData);
+    }
+  };
 
-    return (
-      <div style={{ padding: '1rem', paddingBottom: '6rem', backgroundColor: THEME.bg, minHeight: '100vh', overflowX: 'hidden' }}>
-        <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: '1.25rem' }}>
-          <div>
-            <h1 style={{ fontSize: '1.5rem', fontWeight: 'bold', color: THEME.text, marginBottom: '0.25rem' }}>Add Income</h1>
-            <p style={{ fontSize: '0.8rem', color: THEME.textMuted }}>Track your earnings</p>
-          </div>
-          <button
-            onClick={() => setActiveView('Home')}
+  return (
+    <div style={{ padding: '1rem', paddingBottom: '6rem', backgroundColor: THEME.bg, minHeight: '100vh', overflowX: 'hidden' }}>
+      <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: '1.25rem' }}>
+        <div>
+          <h1 style={{ fontSize: '1.5rem', fontWeight: 'bold', color: THEME.text, marginBottom: '0.25rem' }}>Add Expense</h1>
+          <p style={{ fontSize: '0.8rem', color: THEME.textMuted }}>Track your spending</p>
+        </div>
+        <button
+          onClick={() => setActiveView('Home')}
+          style={{
+            width: '2.5rem',
+            height: '2.5rem',
+            borderRadius: '0.5rem',
+            backgroundColor: THEME.card,
+            border: 'none',
+            cursor: 'pointer',
+            display: 'flex',
+            alignItems: 'center',
+            justifyContent: 'center'
+          }}
+        >
+          <Home size={20} color={THEME.text} />
+        </button>
+      </div>
+
+      <form onSubmit={handleSubmit}>
+        <div style={{ marginBottom: '1.5rem' }}>
+          <label style={{ display: 'block', fontSize: '0.875rem', color: THEME.textMuted, marginBottom: '0.5rem' }}>
+            Expense Name
+          </label>
+          <input
+            type="text"
+            value={formData.name}
+            onChange={(e) => setFormData({ ...formData, name: e.target.value })}
+            placeholder="e.g. Adobe Subscription"
             style={{
-              width: '2.5rem',
-              height: '2.5rem',
-              borderRadius: '0.5rem',
+              width: '100%',
+              padding: '1rem',
+              borderRadius: '0.75rem',
               backgroundColor: THEME.card,
               border: 'none',
-              cursor: 'pointer',
-              display: 'flex',
-              alignItems: 'center',
-              justifyContent: 'center'
+              color: THEME.text,
+              ...MOBILE_INPUT
             }}
-          >
-            <Home size={20} color={THEME.text} />
-          </button>
+            required
+          />
         </div>
 
-        <form onSubmit={handleSubmit}>
-          <div style={{ marginBottom: '1.5rem' }}>
+        <div style={{ marginBottom: '1.5rem' }}>
+          <label style={{ display: 'block', fontSize: '0.875rem', color: THEME.textMuted, marginBottom: '0.5rem' }}>
+            Category
+          </label>
+          <select
+            value={formData.category}
+            onChange={(e) => setFormData({ ...formData, category: e.target.value })}
+            style={{
+              width: '100%',
+              padding: '1rem',
+              borderRadius: '0.75rem',
+              backgroundColor: THEME.card,
+              border: 'none',
+              color: THEME.text,
+              cursor: 'pointer',
+              ...MOBILE_INPUT
+            }}
+          >
+            {EXPENSE_CATEGORIES.map(cat => (
+              <option key={cat} value={cat}>{cat}</option>
+            ))}
+          </select>
+        </div>
+
+        <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: '1rem', marginBottom: '1.5rem' }}>
+          <div>
             <label style={{ display: 'block', fontSize: '0.875rem', color: THEME.textMuted, marginBottom: '0.5rem' }}>
-              Client / Source
+              Amount
             </label>
             <input
-              type="text"
-              value={formData.clientName}
-              onChange={(e) => setFormData({ ...formData, clientName: e.target.value })}
-              placeholder="e.g. Google Project"
+              type="number"
+              value={formData.amount}
+              onChange={(e) => setFormData({ ...formData, amount: e.target.value })}
+              style={{
+                width: '100%',
+                padding: '1rem',
+                borderRadius: '0.75rem',
+                backgroundColor: THEME.card,
+                border: 'none',
+                color: THEME.text,
+                ...MOBILE_INPUT
+              }}
+              step="0.01"
+              required
+            />
+          </div>
+
+          <div>
+            <label style={{ display: 'block', fontSize: '0.875rem', color: THEME.textMuted, marginBottom: '0.5rem' }}>
+              Date
+            </label>
+            <input
+              type="date"
+              value={formData.date}
+              onChange={(e) => setFormData({ ...formData, date: e.target.value })}
               style={{
                 width: '100%',
                 padding: '1rem',
@@ -1001,14 +1354,52 @@ const App = () => {
               required
             />
           </div>
+        </div>
 
-          <div style={{ marginBottom: '1.5rem' }}>
+        {/* Save as Recurring Bill Checkbox */}
+        <div
+          onClick={() => setFormData({ ...formData, isRecurring: !formData.isRecurring })}
+          style={{
+            display: 'flex',
+            alignItems: 'center',
+            gap: '0.75rem',
+            padding: '1rem',
+            backgroundColor: THEME.card,
+            borderRadius: '0.75rem',
+            marginBottom: formData.isRecurring ? '1rem' : '2rem',
+            cursor: 'pointer'
+          }}
+        >
+          <div style={{
+            width: '1.25rem',
+            height: '1.25rem',
+            borderRadius: '0.25rem',
+            border: `2px solid ${formData.isRecurring ? THEME.primary : '#4b5563'}`,
+            backgroundColor: formData.isRecurring ? THEME.primary : 'transparent',
+            display: 'flex',
+            alignItems: 'center',
+            justifyContent: 'center'
+          }}>
+            {formData.isRecurring && (
+              <svg width="12" height="12" viewBox="0 0 12 12" fill="none">
+                <path d="M2 6L5 9L10 3" stroke="white" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" />
+              </svg>
+            )}
+          </div>
+          <span style={{ fontSize: '0.875rem', fontWeight: '500', color: THEME.text }}>
+            Save as Recurring Bill
+          </span>
+        </div>
+
+        {/* Frequency Selector (shown only when isRecurring is true) */}
+        {formData.isRecurring && (
+          <div style={{ marginBottom: '2rem' }}>
             <label style={{ display: 'block', fontSize: '0.875rem', color: THEME.textMuted, marginBottom: '0.5rem' }}>
-              Type
+              Frequency
             </label>
             <select
-              value={formData.type}
-              onChange={(e) => setFormData({ ...formData, type: e.target.value })}
+              value={formData.frequency}
+              onChange={(e) => setFormData({ ...formData, frequency: e.target.value })}
               style={{
                 width: '100%',
                 padding: '1rem',
@@ -1020,605 +1411,190 @@ const App = () => {
                 ...MOBILE_INPUT
               }}
             >
-              {INCOME_TYPES.map(opt => (
-                <option key={opt.value} value={opt.value}>{opt.label}</option>
-              ))}
+              <option value="Monthly">Monthly</option>
+              <option value="Weekly">Weekly</option>
+              <option value="Daily">Daily</option>
             </select>
           </div>
+        )}
 
-          <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: '1rem', marginBottom: '2rem' }}>
-            <div>
-              <label style={{ display: 'block', fontSize: '0.875rem', color: THEME.textMuted, marginBottom: '0.5rem' }}>
-                Amount
-              </label>
-              <input
-                type="number"
-                value={formData.amount}
-                onChange={(e) => setFormData({ ...formData, amount: e.target.value })}
-                style={{
-                  width: '100%',
-                  padding: '1rem',
-                  borderRadius: '0.75rem',
-                  backgroundColor: THEME.card,
-                  border: 'none',
-                  color: THEME.text,
-                  ...MOBILE_INPUT
-                }}
-                step="0.01"
-                required
-              />
-            </div>
-
-            <div>
-              <label style={{ display: 'block', fontSize: '0.875rem', color: THEME.textMuted, marginBottom: '0.5rem' }}>
-                Date
-              </label>
-              <input
-                type="date"
-                value={formData.date}
-                onChange={(e) => setFormData({ ...formData, date: e.target.value })}
-                style={{
-                  width: '100%',
-                  padding: '1rem',
-                  borderRadius: '0.75rem',
-                  backgroundColor: THEME.card,
-                  border: 'none',
-                  color: THEME.text,
-                  ...MOBILE_INPUT
-                }}
-                required
-              />
-            </div>
-          </div>
-
-          <button
-            type="submit"
-            style={{
-              width: '100%',
-              padding: '1rem',
-              borderRadius: '0.75rem',
-              background: `linear-gradient(135deg, ${THEME.primary} 0%, ${THEME.purple} 100%)`,
-              border: 'none',
-              color: 'white',
-              fontSize: '1.125rem',
-              fontWeight: 'bold',
-              cursor: 'pointer',
-              boxShadow: `0 4px 12px ${THEME.primary}50`,
-              ...MOBILE_TOUCH
-            }}
-          >
-            Save Income
-          </button>
-        </form>
-      </div>
-    );
-  };
-
-  // Recurring Bills Component
-  const RecurringBills = () => {
-    const currentMonthYear = formatMonthYear(new Date());
-
-    return (
-      <div style={{ padding: '1rem', paddingBottom: '6rem', backgroundColor: THEME.bg, minHeight: '100vh', overflowX: 'hidden' }}>
-        <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: '1.25rem' }}>
-          <div>
-            <h1 style={{ fontSize: '1.5rem', fontWeight: 'bold', color: THEME.text, marginBottom: '0.25rem' }}>Recurring Bills</h1>
-            <p style={{ fontSize: '0.8rem', color: THEME.textMuted }}>Manage your bills</p>
-          </div>
-          <button
-            onClick={() => setActiveView('Home')}
-            style={{
-              width: '2.5rem',
-              height: '2.5rem',
-              borderRadius: '0.5rem',
-              backgroundColor: THEME.card,
-              border: 'none',
-              cursor: 'pointer',
-              display: 'flex',
-              alignItems: 'center',
-              justifyContent: 'center'
-            }}
-          >
-            <Home size={20} color={THEME.text} />
-          </button>
-        </div>
-
-        {/* Monthly Bills Header */}
-        <div style={{
-          background: `linear-gradient(135deg, ${THEME.primary} 0%, ${THEME.purple} 100%)`,
-          borderRadius: '1rem',
-          padding: '1.5rem',
-          marginBottom: '1.5rem',
-          display: 'flex',
-          justifyContent: 'space-between',
-          alignItems: 'center'
-        }}>
-          <div>
-            <h2 style={{ fontSize: '1.5rem', fontWeight: 'bold', color: 'white', marginBottom: '0.25rem' }}>Monthly Bills</h2>
-            <p style={{ fontSize: '0.875rem', color: 'rgba(255,255,255,0.7)' }}>{currentMonthYear}</p>
-          </div>
-          <Calendar size={32} color="white" />
-        </div>
-
-        {/* Add New Button */}
         <button
-          onClick={() => setActiveView('AddExpense')}
+          type="submit"
           style={{
             width: '100%',
             padding: '1rem',
             borderRadius: '0.75rem',
-            backgroundColor: 'transparent',
-            border: '2px dashed #4b5563',
-            color: THEME.textMuted,
-            fontSize: '0.875rem',
-            fontWeight: '600',
-            cursor: 'pointer',
-            marginBottom: '1.5rem'
-          }}
-        >
-          + Add New Recurring Bill
-        </button>
-
-        {/* Bills List */}
-        {recurringTemplates.length > 0 ? (
-          recurringTemplates.map(bill => {
-            const isPaid = expenses.some(exp =>
-              exp.recurringTemplateId === bill.id &&
-              formatMonthYear(exp.date) === currentMonthYear
-            );
-            const dueDay = bill.dueDay || (bill.createdAt ? bill.createdAt.getDate() : 1);
-
-            return (
-              <div key={bill.id} style={{
-                display: 'flex',
-                justifyContent: 'space-between',
-                alignItems: 'center',
-                padding: '1rem',
-                backgroundColor: THEME.card,
-                borderRadius: '0.75rem',
-                marginBottom: '0.75rem'
-              }}>
-                <div style={{ display: 'flex', alignItems: 'center', gap: '1rem' }}>
-                  <div style={{
-                    width: '2.5rem',
-                    height: '2.5rem',
-                    borderRadius: '0.5rem',
-                    backgroundColor: isPaid ? 'rgba(16, 185, 129, 0.2)' : 'rgba(75, 85, 99, 0.2)',
-                    display: 'flex',
-                    alignItems: 'center',
-                    justifyContent: 'center'
-                  }}>
-                    {isPaid ? <CheckCircle size={20} color={THEME.green} /> : <DollarSign size={20} color={THEME.textMuted} />}
-                  </div>
-                  <div>
-                    <p style={{ fontWeight: '600', color: THEME.text, marginBottom: '0.25rem' }}>{bill.name}</p>
-                    <p style={{ fontSize: '0.75rem', color: THEME.textMuted }}>
-                      Due: {dueDay}th • {formatCurrency(bill.amount)}
-                    </p>
-                  </div>
-                </div>
-
-                {!isPaid ? (
-                  <button
-                    onClick={() => handleMarkPaid(bill)}
-                    style={{
-                      padding: '0.5rem 1rem',
-                      borderRadius: '0.5rem',
-                      backgroundColor: 'white',
-                      color: 'black',
-                      border: 'none',
-                      fontSize: '0.75rem',
-                      fontWeight: 'bold',
-                      cursor: 'pointer',
-                      ...MOBILE_TOUCH
-                    }}
-                  >
-                    Pay
-                  </button>
-                ) : (
-                  <button
-                    onClick={() => handleDelete('template', bill.id)}
-                    style={{
-                      padding: '0.5rem',
-                      backgroundColor: 'transparent',
-                      border: 'none',
-                      cursor: 'pointer',
-                      ...MOBILE_TOUCH
-                    }}
-                  >
-                    <XCircle size={18} color={THEME.textMuted} />
-                  </button>
-                )}
-              </div>
-            );
-          })
-        ) : (
-          <p style={{ textAlign: 'center', color: THEME.textMuted, padding: '3rem' }}>No bills set up.</p>
-        )}
-      </div>
-    );
-  };
-
-  // Add Expense Component
-  const AddExpense = () => {
-    const [formData, setFormData] = useState({
-      name: '',
-      amount: '',
-      date: new Date().toISOString().substring(0, 10),
-      category: EXPENSE_CATEGORIES[0],
-      isRecurring: false,
-      frequency: 'Monthly'
-    });
-
-    const handleSubmit = (e) => {
-      e.preventDefault();
-      if (!formData.name || !formData.amount) {
-        alert('Please fill in all required fields');
-        return;
-      }
-      if (formData.isRecurring) {
-        handleAddRecurringTemplate(formData);
-      } else {
-        handleAddExpense(formData);
-      }
-    };
-
-    return (
-      <div style={{ padding: '1rem', paddingBottom: '6rem', backgroundColor: THEME.bg, minHeight: '100vh', overflowX: 'hidden' }}>
-        <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: '1.25rem' }}>
-          <div>
-            <h1 style={{ fontSize: '1.5rem', fontWeight: 'bold', color: THEME.text, marginBottom: '0.25rem' }}>Add Expense</h1>
-            <p style={{ fontSize: '0.8rem', color: THEME.textMuted }}>Track your spending</p>
-          </div>
-          <button
-            onClick={() => setActiveView('Home')}
-            style={{
-              width: '2.5rem',
-              height: '2.5rem',
-              borderRadius: '0.5rem',
-              backgroundColor: THEME.card,
-              border: 'none',
-              cursor: 'pointer',
-              display: 'flex',
-              alignItems: 'center',
-              justifyContent: 'center'
-            }}
-          >
-            <Home size={20} color={THEME.text} />
-          </button>
-        </div>
-
-        <form onSubmit={handleSubmit}>
-          <div style={{ marginBottom: '1.5rem' }}>
-            <label style={{ display: 'block', fontSize: '0.875rem', color: THEME.textMuted, marginBottom: '0.5rem' }}>
-              Expense Name
-            </label>
-            <input
-              type="text"
-              value={formData.name}
-              onChange={(e) => setFormData({ ...formData, name: e.target.value })}
-              placeholder="e.g. Adobe Subscription"
-              style={{
-                width: '100%',
-                padding: '1rem',
-                borderRadius: '0.75rem',
-                backgroundColor: THEME.card,
-                border: 'none',
-                color: THEME.text,
-                ...MOBILE_INPUT
-              }}
-              required
-            />
-          </div>
-
-          <div style={{ marginBottom: '1.5rem' }}>
-            <label style={{ display: 'block', fontSize: '0.875rem', color: THEME.textMuted, marginBottom: '0.5rem' }}>
-              Category
-            </label>
-            <select
-              value={formData.category}
-              onChange={(e) => setFormData({ ...formData, category: e.target.value })}
-              style={{
-                width: '100%',
-                padding: '1rem',
-                borderRadius: '0.75rem',
-                backgroundColor: THEME.card,
-                border: 'none',
-                color: THEME.text,
-                cursor: 'pointer',
-                ...MOBILE_INPUT
-              }}
-            >
-              {EXPENSE_CATEGORIES.map(cat => (
-                <option key={cat} value={cat}>{cat}</option>
-              ))}
-            </select>
-          </div>
-
-          <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: '1rem', marginBottom: '1.5rem' }}>
-            <div>
-              <label style={{ display: 'block', fontSize: '0.875rem', color: THEME.textMuted, marginBottom: '0.5rem' }}>
-                Amount
-              </label>
-              <input
-                type="number"
-                value={formData.amount}
-                onChange={(e) => setFormData({ ...formData, amount: e.target.value })}
-                style={{
-                  width: '100%',
-                  padding: '1rem',
-                  borderRadius: '0.75rem',
-                  backgroundColor: THEME.card,
-                  border: 'none',
-                  color: THEME.text,
-                  ...MOBILE_INPUT
-                }}
-                step="0.01"
-                required
-              />
-            </div>
-
-            <div>
-              <label style={{ display: 'block', fontSize: '0.875rem', color: THEME.textMuted, marginBottom: '0.5rem' }}>
-                Date
-              </label>
-              <input
-                type="date"
-                value={formData.date}
-                onChange={(e) => setFormData({ ...formData, date: e.target.value })}
-                style={{
-                  width: '100%',
-                  padding: '1rem',
-                  borderRadius: '0.75rem',
-                  backgroundColor: THEME.card,
-                  border: 'none',
-                  color: THEME.text,
-                  ...MOBILE_INPUT
-                }}
-                required
-              />
-            </div>
-          </div>
-
-          {/* Save as Recurring Bill Checkbox */}
-          <div
-            onClick={() => setFormData({ ...formData, isRecurring: !formData.isRecurring })}
-            style={{
-              display: 'flex',
-              alignItems: 'center',
-              gap: '0.75rem',
-              padding: '1rem',
-              backgroundColor: THEME.card,
-              borderRadius: '0.75rem',
-              marginBottom: formData.isRecurring ? '1rem' : '2rem',
-              cursor: 'pointer'
-            }}
-          >
-            <div style={{
-              width: '1.25rem',
-              height: '1.25rem',
-              borderRadius: '0.25rem',
-              border: `2px solid ${formData.isRecurring ? THEME.primary : '#4b5563'}`,
-              backgroundColor: formData.isRecurring ? THEME.primary : 'transparent',
-              display: 'flex',
-              alignItems: 'center',
-              justifyContent: 'center'
-            }}>
-              {formData.isRecurring && (
-                <svg width="12" height="12" viewBox="0 0 12 12" fill="none">
-                  <path d="M2 6L5 9L10 3" stroke="white" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" />
-                </svg>
-              )}
-            </div>
-            <span style={{ fontSize: '0.875rem', fontWeight: '500', color: THEME.text }}>
-              Save as Recurring Bill
-            </span>
-          </div>
-
-          {/* Frequency Selector (shown only when isRecurring is true) */}
-          {formData.isRecurring && (
-            <div style={{ marginBottom: '2rem' }}>
-              <label style={{ display: 'block', fontSize: '0.875rem', color: THEME.textMuted, marginBottom: '0.5rem' }}>
-                Frequency
-              </label>
-              <select
-                value={formData.frequency}
-                onChange={(e) => setFormData({ ...formData, frequency: e.target.value })}
-                style={{
-                  width: '100%',
-                  padding: '1rem',
-                  borderRadius: '0.75rem',
-                  backgroundColor: THEME.card,
-                  border: 'none',
-                  color: THEME.text,
-                  cursor: 'pointer',
-                  ...MOBILE_INPUT
-                }}
-              >
-                <option value="Monthly">Monthly</option>
-                <option value="Weekly">Weekly</option>
-                <option value="Daily">Daily</option>
-              </select>
-            </div>
-          )}
-
-          <button
-            type="submit"
-            style={{
-              width: '100%',
-              padding: '1rem',
-              borderRadius: '0.75rem',
-              background: formData.isRecurring
-                ? `linear-gradient(135deg, ${THEME.primary} 0%, ${THEME.purple} 100%)`
-                : `linear-gradient(135deg, ${THEME.danger} 0%, #dc2626 100%)`,
-              border: 'none',
-              color: 'white',
-              fontSize: '1.125rem',
-              fontWeight: 'bold',
-              cursor: 'pointer',
-              boxShadow: formData.isRecurring ? `0 4px 12px ${THEME.primary}50` : `0 4px 12px ${THEME.danger}50`,
-              ...MOBILE_TOUCH
-            }}
-          >
-            {formData.isRecurring ? 'Save Bill Template' : 'Save Expense'}
-          </button>
-        </form>
-      </div>
-    );
-  };
-
-  // Bottom Navigation
-  const BottomNav = () => (
-    <div style={{
-      position: 'fixed',
-      bottom: '0.75rem',
-      left: '50%',
-      transform: 'translateX(-50%)',
-      zIndex: 50,
-      paddingBottom: 'env(safe-area-inset-bottom)',
-      width: 'calc(100% - 1.5rem)',
-      maxWidth: '24rem'
-    }}>
-      <div style={{
-        backgroundColor: 'rgba(31, 31, 31, 0.7)',
-        backdropFilter: 'blur(20px)',
-        WebkitBackdropFilter: 'blur(20px)',
-        borderRadius: '1.25rem',
-        display: 'flex',
-        alignItems: 'center',
-        justifyContent: 'space-around',
-        padding: '0.5rem 0.75rem',
-        gap: '0.25rem',
-        boxShadow: '0 8px 32px rgba(0,0,0,0.3), inset 0 1px 0 rgba(255,255,255,0.1)',
-        border: '1px solid rgba(255,255,255,0.1)'
-      }}>
-        <button
-          onClick={() => setActiveView('Home')}
-          style={{
-            display: 'flex',
-            flexDirection: 'column',
-            alignItems: 'center',
-            background: 'none',
+            background: formData.isRecurring
+              ? `linear-gradient(135deg, ${THEME.primary} 0%, ${THEME.purple} 100%)`
+              : `linear-gradient(135deg, ${THEME.danger} 0%, #dc2626 100%)`,
             border: 'none',
-            color: activeView === 'Home' ? '#ffffff' : '#6b7280',
+            color: 'white',
+            fontSize: '1.125rem',
+            fontWeight: 'bold',
             cursor: 'pointer',
-            padding: '0.5rem 0.375rem',
-            gap: '0.2rem',
-            ...MOBILE_TOUCH,
-            flex: 1,
-            transition: 'color 0.2s ease'
+            boxShadow: formData.isRecurring ? `0 4px 12px ${THEME.primary}50` : `0 4px 12px ${THEME.danger}50`,
+            ...MOBILE_TOUCH
           }}
         >
-          <Home size={18} strokeWidth={2} />
-          <span style={{ fontSize: '0.55rem', fontWeight: '500' }}>Home</span>
+          {formData.isRecurring ? 'Save Bill Template' : 'Save Expense'}
         </button>
-
-        <button
-          onClick={() => setActiveView('Reports')}
-          style={{
-            display: 'flex',
-            flexDirection: 'column',
-            alignItems: 'center',
-            background: 'none',
-            border: 'none',
-            color: activeView === 'Reports' ? '#ffffff' : '#6b7280',
-            cursor: 'pointer',
-            padding: '0.5rem 0.375rem',
-            gap: '0.2rem',
-            ...MOBILE_TOUCH,
-            flex: 1,
-            transition: 'color 0.2s ease'
-          }}
-        >
-          <TrendingUp size={18} strokeWidth={2} />
-          <span style={{ fontSize: '0.55rem', fontWeight: '500' }}>Reports</span>
-        </button>
-
-        <button
-          onClick={() => setActiveView(activeView === 'AddIncome' ? 'AddExpense' : 'AddIncome')}
-          style={{
-            width: '2.75rem',
-            height: '2.75rem',
-            borderRadius: '50%',
-            background: 'linear-gradient(135deg, #7c7cf5 0%, #9f7cf5 100%)',
-            border: 'none',
-            display: 'flex',
-            alignItems: 'center',
-            justifyContent: 'center',
-            cursor: 'pointer',
-            position: 'relative',
-            boxShadow: '0 4px 16px rgba(124, 124, 245, 0.5)',
-            ...MOBILE_TOUCH,
-            flexShrink: 0,
-            transition: 'transform 0.2s ease'
-          }}
-        >
-          <Plus size={20} color="white" strokeWidth={2.5} />
-        </button>
-
-        <button
-          onClick={() => setActiveView('Recurring')}
-          style={{
-            display: 'flex',
-            flexDirection: 'column',
-            alignItems: 'center',
-            background: 'none',
-            border: 'none',
-            color: activeView === 'Recurring' ? '#ffffff' : '#6b7280',
-            cursor: 'pointer',
-            padding: '0.5rem 0.375rem',
-            gap: '0.2rem',
-            ...MOBILE_TOUCH,
-            flex: 1,
-            transition: 'color 0.2s ease'
-          }}
-        >
-          <Calendar size={18} strokeWidth={2} />
-          <span style={{ fontSize: '0.55rem', fontWeight: '500' }}>Bills</span>
-        </button>
-
-        <button
-          onClick={() => setActiveView('AddExpense')}
-          style={{
-            display: 'flex',
-            flexDirection: 'column',
-            alignItems: 'center',
-            background: 'none',
-            border: 'none',
-            color: activeView === 'AddExpense' ? '#ffffff' : '#6b7280',
-            cursor: 'pointer',
-            padding: '0.5rem 0.375rem',
-            gap: '0.2rem',
-            ...MOBILE_TOUCH,
-            flex: 1,
-            transition: 'color 0.2s ease'
-          }}
-        >
-          <TrendingDown size={18} strokeWidth={2} />
-          <span style={{ fontSize: '0.55rem', fontWeight: '500' }}>Expense</span>
-        </button>
-      </div>
+      </form>
     </div>
   );
+};
 
-  // Main Render
-  return (
+// Bottom Navigation
+const BottomNav = () => (
+  <div style={{
+    position: 'fixed',
+    bottom: '0.75rem',
+    left: '50%',
+    transform: 'translateX(-50%)',
+    zIndex: 50,
+    paddingBottom: 'env(safe-area-inset-bottom)',
+    width: 'calc(100% - 1.5rem)',
+    maxWidth: '24rem'
+  }}>
     <div style={{
-      width: '100%',
-      maxWidth: '28rem',
-      margin: '0 auto',
-      backgroundColor: THEME.bg,
-      minHeight: '100dvh', // Dynamic viewport height for mobile
-      position: 'relative',
-      paddingBottom: 'env(safe-area-inset-bottom)', // iOS safe area
-      WebkitUserSelect: 'none', // Prevent text selection on mobile
-      userSelect: 'none',
-      overflowX: 'hidden'
+      backgroundColor: 'rgba(31, 31, 31, 0.7)',
+      backdropFilter: 'blur(20px)',
+      WebkitBackdropFilter: 'blur(20px)',
+      borderRadius: '1.25rem',
+      display: 'flex',
+      alignItems: 'center',
+      justifyContent: 'space-around',
+      padding: '0.5rem 0.75rem',
+      gap: '0.25rem',
+      boxShadow: '0 8px 32px rgba(0,0,0,0.3), inset 0 1px 0 rgba(255,255,255,0.1)',
+      border: '1px solid rgba(255,255,255,0.1)'
     }}>
-      {renderView()}
-      <BottomNav />
+      <button
+        onClick={() => setActiveView('Home')}
+        style={{
+          display: 'flex',
+          flexDirection: 'column',
+          alignItems: 'center',
+          background: 'none',
+          border: 'none',
+          color: activeView === 'Home' ? '#ffffff' : '#6b7280',
+          cursor: 'pointer',
+          padding: '0.5rem 0.375rem',
+          gap: '0.2rem',
+          ...MOBILE_TOUCH,
+          flex: 1,
+          transition: 'color 0.2s ease'
+        }}
+      >
+        <Home size={18} strokeWidth={2} />
+        <span style={{ fontSize: '0.55rem', fontWeight: '500' }}>Home</span>
+      </button>
+
+      <button
+        onClick={() => setActiveView('Reports')}
+        style={{
+          display: 'flex',
+          flexDirection: 'column',
+          alignItems: 'center',
+          background: 'none',
+          border: 'none',
+          color: activeView === 'Reports' ? '#ffffff' : '#6b7280',
+          cursor: 'pointer',
+          padding: '0.5rem 0.375rem',
+          gap: '0.2rem',
+          ...MOBILE_TOUCH,
+          flex: 1,
+          transition: 'color 0.2s ease'
+        }}
+      >
+        <TrendingUp size={18} strokeWidth={2} />
+        <span style={{ fontSize: '0.55rem', fontWeight: '500' }}>Reports</span>
+      </button>
+
+      <button
+        onClick={() => setActiveView(activeView === 'AddIncome' ? 'AddExpense' : 'AddIncome')}
+        style={{
+          width: '2.75rem',
+          height: '2.75rem',
+          borderRadius: '50%',
+          background: 'linear-gradient(135deg, #7c7cf5 0%, #9f7cf5 100%)',
+          border: 'none',
+          display: 'flex',
+          alignItems: 'center',
+          justifyContent: 'center',
+          cursor: 'pointer',
+          position: 'relative',
+          boxShadow: '0 4px 16px rgba(124, 124, 245, 0.5)',
+          ...MOBILE_TOUCH,
+          flexShrink: 0,
+          transition: 'transform 0.2s ease'
+        }}
+      >
+        <Plus size={20} color="white" strokeWidth={2.5} />
+      </button>
+
+      <button
+        onClick={() => setActiveView('Recurring')}
+        style={{
+          display: 'flex',
+          flexDirection: 'column',
+          alignItems: 'center',
+          background: 'none',
+          border: 'none',
+          color: activeView === 'Recurring' ? '#ffffff' : '#6b7280',
+          cursor: 'pointer',
+          padding: '0.5rem 0.375rem',
+          gap: '0.2rem',
+          ...MOBILE_TOUCH,
+          flex: 1,
+          transition: 'color 0.2s ease'
+        }}
+      >
+        <Calendar size={18} strokeWidth={2} />
+        <span style={{ fontSize: '0.55rem', fontWeight: '500' }}>Bills</span>
+      </button>
+
+      <button
+        onClick={() => setActiveView('AddExpense')}
+        style={{
+          display: 'flex',
+          flexDirection: 'column',
+          alignItems: 'center',
+          background: 'none',
+          border: 'none',
+          color: activeView === 'AddExpense' ? '#ffffff' : '#6b7280',
+          cursor: 'pointer',
+          padding: '0.5rem 0.375rem',
+          gap: '0.2rem',
+          ...MOBILE_TOUCH,
+          flex: 1,
+          transition: 'color 0.2s ease'
+        }}
+      >
+        <TrendingDown size={18} strokeWidth={2} />
+        <span style={{ fontSize: '0.55rem', fontWeight: '500' }}>Expense</span>
+      </button>
     </div>
-  );
+  </div>
+);
+
+// Main Render
+return (
+  <div style={{
+    width: '100%',
+    maxWidth: '28rem',
+    margin: '0 auto',
+    backgroundColor: THEME.bg,
+    minHeight: '100dvh', // Dynamic viewport height for mobile
+    position: 'relative',
+    paddingBottom: 'env(safe-area-inset-bottom)', // iOS safe area
+    WebkitUserSelect: 'none', // Prevent text selection on mobile
+    userSelect: 'none',
+    overflowX: 'hidden'
+  }}>
+    {renderView()}
+    <BottomNav />
+  </div>
+);
 };
 
 export default App;
