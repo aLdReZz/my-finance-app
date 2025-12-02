@@ -40,6 +40,10 @@ input, textarea, select {
   font-size: 11px !important;
 }
 
+.active-filter-bg {
+  border-radius: 0.375rem !important;
+}
+
 .sliding-background {
   transition: margin-left 0.3s ease-in-out !important;
 }

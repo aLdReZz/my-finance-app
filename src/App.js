@@ -1,4 +1,5 @@
 import React, { useState, useEffect, useMemo } from 'react';
+import { motion } from 'framer-motion';
 import { initializeApp } from 'firebase/app';
 import { getAuth, signInAnonymously, onAuthStateChanged } from 'firebase/auth';
 import { getFirestore, doc, addDoc, onSnapshot, collection, query, orderBy, Timestamp, deleteDoc } from 'firebase/firestore';
@@ -561,22 +562,6 @@ const App = () => {
             minWidth: '220px',
             gap: '0.25rem'
           }}>
-            {/* Sliding Background */}
-            <div
-              key="slider"
-              className={`sliding-background ${duesFilter === 'Monthly' ? 'position-0' : duesFilter === 'Weekly' ? 'position-1' : 'position-2'}`}
-              style={{
-                position: 'absolute',
-                top: '4px',
-                bottom: '4px',
-                left: '4px',
-                width: 'calc(33.33% - 4px)',
-                backgroundColor: '#8b5cf6',
-                borderRadius: '0.375rem',
-                boxShadow: '0 1px 2px 0 rgba(0, 0, 0, 0.05)'
-              }}
-            ></div>
-
             {['Monthly', 'Weekly', 'Daily'].map(filter => (
               <button
                 key={filter}
@@ -603,6 +588,26 @@ const App = () => {
                   minWidth: 'auto'
                 }}
               >
+                {duesFilter === filter && (
+                  <motion.div
+                    layoutId="activeFilter"
+                    className="active-filter-bg"
+                    style={{
+                      position: 'absolute',
+                      top: 0,
+                      left: 0,
+                      right: 0,
+                      bottom: 0,
+                      backgroundColor: '#8b5cf6',
+                      zIndex: -1
+                    }}
+                    transition={{
+                      type: 'spring',
+                      stiffness: 300,
+                      damping: 30
+                    }}
+                  />
+                )}
                 {filter}
               </button>
             ))}
