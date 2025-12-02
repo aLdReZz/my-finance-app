@@ -695,7 +695,7 @@ const App = () => {
                   display: 'flex',
                   justifyContent: 'space-between',
                   alignItems: 'center',
-                  padding: '0.5rem',
+                  padding: '0.4rem',
                   backgroundColor: '#27272a',
                   borderRadius: '0.5rem',
                   marginBottom: '0.375rem',
