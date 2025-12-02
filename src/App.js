@@ -563,13 +563,14 @@ const App = () => {
           }}>
             {/* Sliding Background */}
             <div
-              className="sliding-background"
+              key="slider"
+              className={`sliding-background ${duesFilter === 'Monthly' ? 'position-0' : duesFilter === 'Weekly' ? 'position-1' : 'position-2'}`}
               style={{
                 position: 'absolute',
                 top: '4px',
                 bottom: '4px',
-                left: duesFilter === 'Monthly' ? '4px' : duesFilter === 'Weekly' ? 'calc(33.33% + 4px + 0.0833rem)' : 'calc(66.66% + 4px + 0.1666rem)',
-                width: 'calc((100% - 8px - 0.5rem) / 3)',
+                left: '4px',
+                width: 'calc(33.33% - 4px)',
                 backgroundColor: '#8b5cf6',
                 borderRadius: '0.375rem',
                 boxShadow: '0 1px 2px 0 rgba(0, 0, 0, 0.05)'
@@ -580,7 +581,10 @@ const App = () => {
               <button
                 key={filter}
                 className="filter-button-small"
-                onClick={() => setDuesFilter(filter)}
+                onClick={() => {
+                  console.log('Filter clicked:', filter);
+                  setDuesFilter(filter);
+                }}
                 style={{
                   position: 'relative',
                   zIndex: 10,
