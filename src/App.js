@@ -707,252 +707,254 @@ const App = () => {
                 }}>
                   <div style={{ flex: '1', minWidth: '0' }}>
                     <p style={{ fontWeight: '700', color: THEME.text, marginBottom: '0', fontSize: '0.75rem', overflow: 'hidden', textOverflow: 'ellipsis', whiteSpace: 'nowrap' }}>{bill.name}</p>
-                    <div style={{ textAlign: 'right', flexShrink: 0 }}>
-                      <p style={{ fontWeight: '800', color: THEME.text, fontSize: '0.8rem', marginBottom: '0.0625rem', whiteSpace: 'nowrap' }}>{formatCurrency(bill.amount)}</p>
-                      {isPaid ? (
-                        <span style={{
+                    <p style={{ fontSize: '0.6rem', color: '#9ca3af', fontWeight: '500' }}>Due on the {dueDay}th</p>
+                  </div>
+                  <div style={{ textAlign: 'right', flexShrink: 0 }}>
+                    <p style={{ fontWeight: '800', color: THEME.text, fontSize: '0.8rem', marginBottom: '0.0625rem', whiteSpace: 'nowrap' }}>{formatCurrency(bill.amount)}</p>
+                    {isPaid ? (
+                      <span style={{
+                        fontSize: '0.5rem',
+                        color: '#22c55e',
+                        fontWeight: '600',
+                        backgroundColor: 'transparent',
+                        border: 'none',
+                        padding: '0.125rem',
+                        display: 'inline-block'
+                      }}>Paid</span>
+                    ) : (
+                      <button
+                        onClick={() => handleMarkPaid(bill)}
+                        style={{
                           fontSize: '0.5rem',
-                          color: '#22c55e',
                           fontWeight: '600',
                           backgroundColor: 'transparent',
+                          color: '#9ca3af',
                           border: 'none',
                           padding: '0.125rem',
-                          display: 'inline-block'
-                        }}>Paid</span>
-                      ) : (
-                        <button
-                          onClick={() => handleMarkPaid(bill)}
-                          style={{
-                            fontSize: '0.5rem',
-                            fontWeight: '600',
-                            backgroundColor: 'transparent',
-                            color: '#9ca3af',
-                            border: 'none',
-                            padding: '0.125rem',
-                            cursor: 'pointer',
-                            ...MOBILE_TOUCH
-                          }}
-                        >
-                          Mark Paid
-                        </button>
-                      )}
-                    </div>
+                          cursor: 'pointer',
+                          ...MOBILE_TOUCH
+                        }}
+                      >
+                        Mark Paid
+                      </button>
+                    )}
                   </div>
-                  );
-            })
-                  ) : (
-                  <p style={{ textAlign: 'center', color: THEME.textMuted, padding: '1rem' }}>No bills set up yet</p>
-          )}
                 </div>
+              );
+            })
+          ) : (
+            <p style={{ textAlign: 'center', color: THEME.textMuted, padding: '1rem' }}>No bills set up yet</p>
+          )}
+        </div>
       </div>
-      </div>
-      );
+    </div>
+  );
 
-// Reports Component
-const Reports = () => (
-      <div style={{ padding: '1rem', paddingBottom: '6rem', backgroundColor: THEME.bg, minHeight: '100vh', overflowX: 'hidden' }}>
-        <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: '1.25rem' }}>
-          <div>
-            <h1 style={{ fontSize: '1.5rem', fontWeight: 'bold', color: THEME.text, marginBottom: '0.25rem' }}>Reports</h1>
-            <p style={{ fontSize: '0.8rem', color: THEME.textMuted }}>Welcome back!</p>
-          </div>
+  // Reports Component
+  const Reports = () => (
+    <div style={{ padding: '1rem', paddingBottom: '6rem', backgroundColor: THEME.bg, minHeight: '100vh', overflowX: 'hidden' }}>
+      <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: '1.25rem' }}>
+        <div>
+          <h1 style={{ fontSize: '1.5rem', fontWeight: 'bold', color: THEME.text, marginBottom: '0.25rem' }}>Reports</h1>
+          <p style={{ fontSize: '0.8rem', color: THEME.textMuted }}>Welcome back!</p>
+        </div>
+        <button
+          onClick={() => setActiveView('Home')}
+          style={{
+            width: '2.5rem',
+            height: '2.5rem',
+            borderRadius: '0.5rem',
+            backgroundColor: THEME.card,
+            border: 'none',
+            cursor: 'pointer',
+            display: 'flex',
+            alignItems: 'center',
+            justifyContent: 'center'
+          }}
+        >
+          <Home size={20} color={THEME.text} />
+        </button>
+      </div>
+
+      {/* View Toggle */}
+      <div style={{ display: 'flex', gap: '0.5rem', marginBottom: '1.5rem', backgroundColor: THEME.card, padding: '0.25rem', borderRadius: '0.75rem' }}>
+        {['Monthly', 'Weekly', 'Daily'].map(view => (
           <button
-            onClick={() => setActiveView('Home')}
+            key={view}
+            onClick={() => setReportView(view)}
             style={{
-              width: '2.5rem',
-              height: '2.5rem',
+              flex: 1,
+              padding: '0.75rem',
               borderRadius: '0.5rem',
-              backgroundColor: THEME.card,
+              fontSize: '0.875rem',
+              fontWeight: '600',
+              backgroundColor: reportView === view ? THEME.primary : 'transparent',
+              color: THEME.text,
               border: 'none',
               cursor: 'pointer',
-              display: 'flex',
-              alignItems: 'center',
-              justifyContent: 'center'
+              ...MOBILE_TOUCH
             }}
           >
-            <Home size={20} color={THEME.text} />
+            {view}
           </button>
-        </div>
+        ))}
+      </div>
 
-        {/* View Toggle */}
-        <div style={{ display: 'flex', gap: '0.5rem', marginBottom: '1.5rem', backgroundColor: THEME.card, padding: '0.25rem', borderRadius: '0.75rem' }}>
-          {['Monthly', 'Weekly', 'Daily'].map(view => (
-            <button
-              key={view}
-              onClick={() => setReportView(view)}
-              style={{
-                flex: 1,
-                padding: '0.75rem',
-                borderRadius: '0.5rem',
-                fontSize: '0.875rem',
-                fontWeight: '600',
-                backgroundColor: reportView === view ? THEME.primary : 'transparent',
-                color: THEME.text,
-                border: 'none',
-                cursor: 'pointer',
-                ...MOBILE_TOUCH
-              }}
-            >
-              {view}
-            </button>
-          ))}
-        </div>
+      {/* Date Navigation */}
+      <div style={{
+        display: 'flex',
+        justifyContent: 'space-between',
+        alignItems: 'center',
+        marginBottom: '1.5rem',
+        padding: '1rem',
+        backgroundColor: THEME.card,
+        borderRadius: '0.75rem'
+      }}>
+        <button style={{ background: 'none', border: 'none', cursor: 'pointer' }}>
+          <svg width="24" height="24" fill="none" stroke={THEME.text} strokeWidth="2">
+            <path d="M15 18l-6-6 6-6" />
+          </svg>
+        </button>
+        <span style={{ fontSize: '1.125rem', fontWeight: 'bold', color: THEME.text }}>
+          November 2025
+        </span>
+        <button style={{ background: 'none', border: 'none', cursor: 'pointer' }}>
+          <svg width="24" height="24" fill="none" stroke={THEME.text} strokeWidth="2">
+            <path d="M9 18l6-6-6-6" />
+          </svg>
+        </button>
+      </div>
 
-        {/* Date Navigation */}
+      {/* Total Cards */}
+      <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: '1rem', marginBottom: '1.5rem' }}>
         <div style={{
-          display: 'flex',
-          justifyContent: 'space-between',
-          alignItems: 'center',
-          marginBottom: '1.5rem',
-          padding: '1rem',
-          backgroundColor: THEME.card,
-          borderRadius: '0.75rem'
-        }}>
-          <button style={{ background: 'none', border: 'none', cursor: 'pointer' }}>
-            <svg width="24" height="24" fill="none" stroke={THEME.text} strokeWidth="2">
-              <path d="M15 18l-6-6 6-6" />
-            </svg>
-          </button>
-          <span style={{ fontSize: '1.125rem', fontWeight: 'bold', color: THEME.text }}>
-            November 2025
-          </span>
-          <button style={{ background: 'none', border: 'none', cursor: 'pointer' }}>
-            <svg width="24" height="24" fill="none" stroke={THEME.text} strokeWidth="2">
-              <path d="M9 18l6-6-6-6" />
-            </svg>
-          </button>
-        </div>
-
-        {/* Total Cards */}
-        <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: '1rem', marginBottom: '1.5rem' }}>
-          <div style={{
-            background: 'linear-gradient(135deg, #065f46 0%, #047857 100%)',
-            borderRadius: '0.75rem',
-            padding: '1.25rem'
-          }}>
-            <p style={{ fontSize: '0.75rem', color: '#a7f3d0', fontWeight: 'bold', marginBottom: '0.5rem' }}>Total Income</p>
-            <p style={{ fontSize: '1.5rem', fontWeight: 'bold', color: 'white' }}>
-              <AnimatedCounter value={filteredTransactions.totalIncome} />
-            </p>
-          </div>
-
-          <div style={{
-            background: 'linear-gradient(135deg, #7f1d1d 0%, #991b1b 100%)',
-            borderRadius: '0.75rem',
-            padding: '1.25rem'
-          }}>
-            <p style={{ fontSize: '0.75rem', color: '#fca5a5', fontWeight: 'bold', marginBottom: '0.5rem' }}>Total Expenses</p>
-            <p style={{ fontSize: '1.5rem', fontWeight: 'bold', color: 'white' }}>
-              <AnimatedCounter value={filteredTransactions.totalExpense} />
-            </p>
-          </div>
-        </div>
-
-        {/* Net Cash Flow */}
-        <div style={{
-          backgroundColor: THEME.card,
+          background: 'linear-gradient(135deg, #065f46 0%, #047857 100%)',
           borderRadius: '0.75rem',
-          padding: '1.5rem',
-          textAlign: 'center',
-          marginBottom: '1.5rem'
+          padding: '1.25rem'
         }}>
-          <p style={{ fontSize: '0.875rem', color: THEME.textMuted, marginBottom: '0.5rem' }}>Net Cash Flow</p>
-          <p style={{
-            fontSize: '2.5rem',
-            fontWeight: 'bold',
-            color: filteredTransactions.netCashflow >= 0 ? THEME.green : THEME.danger
-          }}>
-            {filteredTransactions.netCashflow > 0 ? '+' : ''}
-            <AnimatedCounter value={filteredTransactions.netCashflow} />
+          <p style={{ fontSize: '0.75rem', color: '#a7f3d0', fontWeight: 'bold', marginBottom: '0.5rem' }}>Total Income</p>
+          <p style={{ fontSize: '1.5rem', fontWeight: 'bold', color: 'white' }}>
+            <AnimatedCounter value={filteredTransactions.totalIncome} />
           </p>
         </div>
 
-        {/* History */}
-        <h3 style={{ fontSize: '1rem', fontWeight: 'bold', color: THEME.text, marginBottom: '1rem' }}>History</h3>
-        {[...filteredTransactions.incomes, ...filteredTransactions.expenses]
-          .sort((a, b) => b.date - a.date)
-          .map(t => {
-            const isIncome = !!t.clientName;
-            return (
-              <div key={t.id} style={{
-                display: 'flex',
-                justifyContent: 'space-between',
-                alignItems: 'center',
-                padding: '1rem',
-                backgroundColor: THEME.card,
-                borderRadius: '0.75rem',
-                marginBottom: '0.75rem'
-              }}>
-                <div style={{ display: 'flex', alignItems: 'center', gap: '1rem' }}>
-                  <div style={{
-                    width: '2.5rem',
-                    height: '2.5rem',
-                    borderRadius: '0.5rem',
-                    backgroundColor: isIncome ? 'rgba(16, 185, 129, 0.1)' : 'rgba(239, 68, 68, 0.1)',
-                    display: 'flex',
-                    alignItems: 'center',
-                    justifyContent: 'center'
-                  }}>
-                    {isIncome ? <TrendingUp size={20} color={THEME.green} /> : <TrendingDown size={20} color={THEME.danger} />}
-                  </div>
-                  <div>
-                    <p style={{ fontWeight: '600', color: THEME.text, marginBottom: '0.25rem' }}>
-                      {isIncome ? t.clientName : t.name}
-                    </p>
-                    <p style={{ fontSize: '0.75rem', color: THEME.textMuted }}>
-                      {formatDate(t.date)} • {isIncome ? t.type : t.category}
-                    </p>
-                  </div>
+        <div style={{
+          background: 'linear-gradient(135deg, #7f1d1d 0%, #991b1b 100%)',
+          borderRadius: '0.75rem',
+          padding: '1.25rem'
+        }}>
+          <p style={{ fontSize: '0.75rem', color: '#fca5a5', fontWeight: 'bold', marginBottom: '0.5rem' }}>Total Expenses</p>
+          <p style={{ fontSize: '1.5rem', fontWeight: 'bold', color: 'white' }}>
+            <AnimatedCounter value={filteredTransactions.totalExpense} />
+          </p>
+        </div>
+      </div>
+
+      {/* Net Cash Flow */}
+      <div style={{
+        backgroundColor: THEME.card,
+        borderRadius: '0.75rem',
+        padding: '1.5rem',
+        textAlign: 'center',
+        marginBottom: '1.5rem'
+      }}>
+        <p style={{ fontSize: '0.875rem', color: THEME.textMuted, marginBottom: '0.5rem' }}>Net Cash Flow</p>
+        <p style={{
+          fontSize: '2.5rem',
+          fontWeight: 'bold',
+          color: filteredTransactions.netCashflow >= 0 ? THEME.green : THEME.danger
+        }}>
+          {filteredTransactions.netCashflow > 0 ? '+' : ''}
+          <AnimatedCounter value={filteredTransactions.netCashflow} />
+        </p>
+      </div>
+
+      {/* History */}
+      <h3 style={{ fontSize: '1rem', fontWeight: 'bold', color: THEME.text, marginBottom: '1rem' }}>History</h3>
+      {[...filteredTransactions.incomes, ...filteredTransactions.expenses]
+        .sort((a, b) => b.date - a.date)
+        .map(t => {
+          const isIncome = !!t.clientName;
+          return (
+            <div key={t.id} style={{
+              display: 'flex',
+              justifyContent: 'space-between',
+              alignItems: 'center',
+              padding: '1rem',
+              backgroundColor: THEME.card,
+              borderRadius: '0.75rem',
+              marginBottom: '0.75rem'
+            }}>
+              <div style={{ display: 'flex', alignItems: 'center', gap: '1rem' }}>
+                <div style={{
+                  width: '2.5rem',
+                  height: '2.5rem',
+                  borderRadius: '0.5rem',
+                  backgroundColor: isIncome ? 'rgba(16, 185, 129, 0.1)' : 'rgba(239, 68, 68, 0.1)',
+                  display: 'flex',
+                  alignItems: 'center',
+                  justifyContent: 'center'
+                }}>
+                  {isIncome ? <TrendingUp size={20} color={THEME.green} /> : <TrendingDown size={20} color={THEME.danger} />}
                 </div>
-                <div style={{ textAlign: 'right' }}>
-                  <p style={{
-                    fontWeight: 'bold',
-                    fontSize: '1.125rem',
-                    color: isIncome ? THEME.green : THEME.text
-                  }}>
-                    {isIncome ? '+' : '-'}{formatCurrency(t.amount)}
+                <div>
+                  <p style={{ fontWeight: '600', color: THEME.text, marginBottom: '0.25rem' }}>
+                    {isIncome ? t.clientName : t.name}
                   </p>
-                  <button
-                    onClick={() => handleDelete(isIncome ? 'income' : 'expense', t.id)}
-                    style={{
-                      fontSize: '0.75rem',
-                      color: THEME.textMuted,
-                      background: 'none',
-                      border: 'none',
-                      cursor: 'pointer',
-                      marginTop: '0.25rem',
-                      padding: '0.5rem',
-                      ...MOBILE_TOUCH
-                    }}
-                  >
-                    Delete
-                  </button>
+                  <p style={{ fontSize: '0.75rem', color: THEME.textMuted }}>
+                    {formatDate(t.date)} • {isIncome ? t.type : t.category}
+                  </p>
                 </div>
               </div>
-            );
-          })}
-      </div>
-      );
+              <div style={{ textAlign: 'right' }}>
+                <p style={{
+                  fontWeight: 'bold',
+                  fontSize: '1.125rem',
+                  color: isIncome ? THEME.green : THEME.text
+                }}>
+                  {isIncome ? '+' : '-'}{formatCurrency(t.amount)}
+                </p>
+                <button
+                  onClick={() => handleDelete(isIncome ? 'income' : 'expense', t.id)}
+                  style={{
+                    fontSize: '0.75rem',
+                    color: THEME.textMuted,
+                    background: 'none',
+                    border: 'none',
+                    cursor: 'pointer',
+                    marginTop: '0.25rem',
+                    padding: '0.5rem',
+                    ...MOBILE_TOUCH
+                  }}
+                >
+                  Delete
+                </button>
+              </div>
+            </div>
+          );
+        })}
+    </div>
+  );
 
-// Add Income Component
-const AddIncome = () => {
-  const [formData, setFormData] = useState({
-        clientName: '',
+  // Add Income Component
+  const AddIncome = () => {
+    const [formData, setFormData] = useState({
+      clientName: '',
       amount: '',
       date: new Date().toISOString().substring(0, 10),
       type: INCOME_TYPES[0].value
-  });
+    });
 
-  const handleSubmit = (e) => {
-        e.preventDefault();
+    const handleSubmit = (e) => {
+      e.preventDefault();
       if (!formData.clientName || !formData.amount) {
         alert('Please fill in all required fields');
-      return;
-    }
+        return;
+      }
       handleAddIncome(formData);
-  };
+    };
 
-      return (
+    return (
       <div style={{ padding: '1rem', paddingBottom: '6rem', backgroundColor: THEME.bg, minHeight: '100vh', overflowX: 'hidden' }}>
         <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: '1.25rem' }}>
           <div>
@@ -1089,14 +1091,14 @@ const AddIncome = () => {
           </button>
         </form>
       </div>
-      );
-};
+    );
+  };
 
-// Recurring Bills Component
-const RecurringBills = () => {
-  const currentMonthYear = formatMonthYear(new Date());
+  // Recurring Bills Component
+  const RecurringBills = () => {
+    const currentMonthYear = formatMonthYear(new Date());
 
-      return (
+    return (
       <div style={{ padding: '1rem', paddingBottom: '6rem', backgroundColor: THEME.bg, minHeight: '100vh', overflowX: 'hidden' }}>
         <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: '1.25rem' }}>
           <div>
@@ -1234,34 +1236,34 @@ const RecurringBills = () => {
           <p style={{ textAlign: 'center', color: THEME.textMuted, padding: '3rem' }}>No bills set up.</p>
         )}
       </div>
-      );
-};
+    );
+  };
 
-// Add Expense Component
-const AddExpense = () => {
-  const [formData, setFormData] = useState({
-        name: '',
+  // Add Expense Component
+  const AddExpense = () => {
+    const [formData, setFormData] = useState({
+      name: '',
       amount: '',
       date: new Date().toISOString().substring(0, 10),
       category: EXPENSE_CATEGORIES[0],
       isRecurring: false,
       frequency: 'Monthly'
-  });
+    });
 
-  const handleSubmit = (e) => {
-        e.preventDefault();
+    const handleSubmit = (e) => {
+      e.preventDefault();
       if (!formData.name || !formData.amount) {
         alert('Please fill in all required fields');
-      return;
-    }
+        return;
+      }
       if (formData.isRecurring) {
         handleAddRecurringTemplate(formData);
-    } else {
+      } else {
         handleAddExpense(formData);
-    }
-  };
+      }
+    };
 
-      return (
+    return (
       <div style={{ padding: '1rem', paddingBottom: '6rem', backgroundColor: THEME.bg, minHeight: '100vh', overflowX: 'hidden' }}>
         <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: '1.25rem' }}>
           <div>
@@ -1462,161 +1464,161 @@ const AddExpense = () => {
           </button>
         </form>
       </div>
-      );
+    );
+  };
+
+  // Bottom Navigation
+  const BottomNav = () => (
+    <div style={{
+      position: 'fixed',
+      bottom: '0.75rem',
+      left: '50%',
+      transform: 'translateX(-50%)',
+      zIndex: 50,
+      paddingBottom: 'env(safe-area-inset-bottom)',
+      width: 'calc(100% - 1.5rem)',
+      maxWidth: '24rem'
+    }}>
+      <div style={{
+        backgroundColor: 'rgba(31, 31, 31, 0.7)',
+        backdropFilter: 'blur(20px)',
+        WebkitBackdropFilter: 'blur(20px)',
+        borderRadius: '1.25rem',
+        display: 'flex',
+        alignItems: 'center',
+        justifyContent: 'space-around',
+        padding: '0.5rem 0.75rem',
+        gap: '0.25rem',
+        boxShadow: '0 8px 32px rgba(0,0,0,0.3), inset 0 1px 0 rgba(255,255,255,0.1)',
+        border: '1px solid rgba(255,255,255,0.1)'
+      }}>
+        <button
+          onClick={() => setActiveView('Home')}
+          style={{
+            display: 'flex',
+            flexDirection: 'column',
+            alignItems: 'center',
+            background: 'none',
+            border: 'none',
+            color: activeView === 'Home' ? '#ffffff' : '#6b7280',
+            cursor: 'pointer',
+            padding: '0.5rem 0.375rem',
+            gap: '0.2rem',
+            ...MOBILE_TOUCH,
+            flex: 1,
+            transition: 'color 0.2s ease'
+          }}
+        >
+          <Home size={18} strokeWidth={2} />
+          <span style={{ fontSize: '0.55rem', fontWeight: '500' }}>Home</span>
+        </button>
+
+        <button
+          onClick={() => setActiveView('Reports')}
+          style={{
+            display: 'flex',
+            flexDirection: 'column',
+            alignItems: 'center',
+            background: 'none',
+            border: 'none',
+            color: activeView === 'Reports' ? '#ffffff' : '#6b7280',
+            cursor: 'pointer',
+            padding: '0.5rem 0.375rem',
+            gap: '0.2rem',
+            ...MOBILE_TOUCH,
+            flex: 1,
+            transition: 'color 0.2s ease'
+          }}
+        >
+          <TrendingUp size={18} strokeWidth={2} />
+          <span style={{ fontSize: '0.55rem', fontWeight: '500' }}>Reports</span>
+        </button>
+
+        <button
+          onClick={() => setActiveView(activeView === 'AddIncome' ? 'AddExpense' : 'AddIncome')}
+          style={{
+            width: '2.75rem',
+            height: '2.75rem',
+            borderRadius: '50%',
+            background: 'linear-gradient(135deg, #7c7cf5 0%, #9f7cf5 100%)',
+            border: 'none',
+            display: 'flex',
+            alignItems: 'center',
+            justifyContent: 'center',
+            cursor: 'pointer',
+            position: 'relative',
+            boxShadow: '0 4px 16px rgba(124, 124, 245, 0.5)',
+            ...MOBILE_TOUCH,
+            flexShrink: 0,
+            transition: 'transform 0.2s ease'
+          }}
+        >
+          <Plus size={20} color="white" strokeWidth={2.5} />
+        </button>
+
+        <button
+          onClick={() => setActiveView('Recurring')}
+          style={{
+            display: 'flex',
+            flexDirection: 'column',
+            alignItems: 'center',
+            background: 'none',
+            border: 'none',
+            color: activeView === 'Recurring' ? '#ffffff' : '#6b7280',
+            cursor: 'pointer',
+            padding: '0.5rem 0.375rem',
+            gap: '0.2rem',
+            ...MOBILE_TOUCH,
+            flex: 1,
+            transition: 'color 0.2s ease'
+          }}
+        >
+          <Calendar size={18} strokeWidth={2} />
+          <span style={{ fontSize: '0.55rem', fontWeight: '500' }}>Bills</span>
+        </button>
+
+        <button
+          onClick={() => setActiveView('AddExpense')}
+          style={{
+            display: 'flex',
+            flexDirection: 'column',
+            alignItems: 'center',
+            background: 'none',
+            border: 'none',
+            color: activeView === 'AddExpense' ? '#ffffff' : '#6b7280',
+            cursor: 'pointer',
+            padding: '0.5rem 0.375rem',
+            gap: '0.2rem',
+            ...MOBILE_TOUCH,
+            flex: 1,
+            transition: 'color 0.2s ease'
+          }}
+        >
+          <TrendingDown size={18} strokeWidth={2} />
+          <span style={{ fontSize: '0.55rem', fontWeight: '500' }}>Expense</span>
+        </button>
+      </div>
+    </div>
+  );
+
+  // Main Render
+  return (
+    <div style={{
+      width: '100%',
+      maxWidth: '28rem',
+      margin: '0 auto',
+      backgroundColor: THEME.bg,
+      minHeight: '100dvh', // Dynamic viewport height for mobile
+      position: 'relative',
+      paddingBottom: 'env(safe-area-inset-bottom)', // iOS safe area
+      WebkitUserSelect: 'none', // Prevent text selection on mobile
+      userSelect: 'none',
+      overflowX: 'hidden'
+    }}>
+      {renderView()}
+      <BottomNav />
+    </div>
+  );
 };
 
-// Bottom Navigation
-const BottomNav = () => (
-      <div style={{
-        position: 'fixed',
-        bottom: '0.75rem',
-        left: '50%',
-        transform: 'translateX(-50%)',
-        zIndex: 50,
-        paddingBottom: 'env(safe-area-inset-bottom)',
-        width: 'calc(100% - 1.5rem)',
-        maxWidth: '24rem'
-      }}>
-        <div style={{
-          backgroundColor: 'rgba(31, 31, 31, 0.7)',
-          backdropFilter: 'blur(20px)',
-          WebkitBackdropFilter: 'blur(20px)',
-          borderRadius: '1.25rem',
-          display: 'flex',
-          alignItems: 'center',
-          justifyContent: 'space-around',
-          padding: '0.5rem 0.75rem',
-          gap: '0.25rem',
-          boxShadow: '0 8px 32px rgba(0,0,0,0.3), inset 0 1px 0 rgba(255,255,255,0.1)',
-          border: '1px solid rgba(255,255,255,0.1)'
-        }}>
-          <button
-            onClick={() => setActiveView('Home')}
-            style={{
-              display: 'flex',
-              flexDirection: 'column',
-              alignItems: 'center',
-              background: 'none',
-              border: 'none',
-              color: activeView === 'Home' ? '#ffffff' : '#6b7280',
-              cursor: 'pointer',
-              padding: '0.5rem 0.375rem',
-              gap: '0.2rem',
-              ...MOBILE_TOUCH,
-              flex: 1,
-              transition: 'color 0.2s ease'
-            }}
-          >
-            <Home size={18} strokeWidth={2} />
-            <span style={{ fontSize: '0.55rem', fontWeight: '500' }}>Home</span>
-          </button>
-
-          <button
-            onClick={() => setActiveView('Reports')}
-            style={{
-              display: 'flex',
-              flexDirection: 'column',
-              alignItems: 'center',
-              background: 'none',
-              border: 'none',
-              color: activeView === 'Reports' ? '#ffffff' : '#6b7280',
-              cursor: 'pointer',
-              padding: '0.5rem 0.375rem',
-              gap: '0.2rem',
-              ...MOBILE_TOUCH,
-              flex: 1,
-              transition: 'color 0.2s ease'
-            }}
-          >
-            <TrendingUp size={18} strokeWidth={2} />
-            <span style={{ fontSize: '0.55rem', fontWeight: '500' }}>Reports</span>
-          </button>
-
-          <button
-            onClick={() => setActiveView(activeView === 'AddIncome' ? 'AddExpense' : 'AddIncome')}
-            style={{
-              width: '2.75rem',
-              height: '2.75rem',
-              borderRadius: '50%',
-              background: 'linear-gradient(135deg, #7c7cf5 0%, #9f7cf5 100%)',
-              border: 'none',
-              display: 'flex',
-              alignItems: 'center',
-              justifyContent: 'center',
-              cursor: 'pointer',
-              position: 'relative',
-              boxShadow: '0 4px 16px rgba(124, 124, 245, 0.5)',
-              ...MOBILE_TOUCH,
-              flexShrink: 0,
-              transition: 'transform 0.2s ease'
-            }}
-          >
-            <Plus size={20} color="white" strokeWidth={2.5} />
-          </button>
-
-          <button
-            onClick={() => setActiveView('Recurring')}
-            style={{
-              display: 'flex',
-              flexDirection: 'column',
-              alignItems: 'center',
-              background: 'none',
-              border: 'none',
-              color: activeView === 'Recurring' ? '#ffffff' : '#6b7280',
-              cursor: 'pointer',
-              padding: '0.5rem 0.375rem',
-              gap: '0.2rem',
-              ...MOBILE_TOUCH,
-              flex: 1,
-              transition: 'color 0.2s ease'
-            }}
-          >
-            <Calendar size={18} strokeWidth={2} />
-            <span style={{ fontSize: '0.55rem', fontWeight: '500' }}>Bills</span>
-          </button>
-
-          <button
-            onClick={() => setActiveView('AddExpense')}
-            style={{
-              display: 'flex',
-              flexDirection: 'column',
-              alignItems: 'center',
-              background: 'none',
-              border: 'none',
-              color: activeView === 'AddExpense' ? '#ffffff' : '#6b7280',
-              cursor: 'pointer',
-              padding: '0.5rem 0.375rem',
-              gap: '0.2rem',
-              ...MOBILE_TOUCH,
-              flex: 1,
-              transition: 'color 0.2s ease'
-            }}
-          >
-            <TrendingDown size={18} strokeWidth={2} />
-            <span style={{ fontSize: '0.55rem', fontWeight: '500' }}>Expense</span>
-          </button>
-        </div>
-      </div>
-      );
-
-      // Main Render
-      return (
-      <div style={{
-        width: '100%',
-        maxWidth: '28rem',
-        margin: '0 auto',
-        backgroundColor: THEME.bg,
-        minHeight: '100dvh', // Dynamic viewport height for mobile
-        position: 'relative',
-        paddingBottom: 'env(safe-area-inset-bottom)', // iOS safe area
-        WebkitUserSelect: 'none', // Prevent text selection on mobile
-        userSelect: 'none',
-        overflowX: 'hidden'
-      }}>
-        {renderView()}
-        <BottomNav />
-      </div>
-      );
-};
-
-      export default App;
+export default App;
