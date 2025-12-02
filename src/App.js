@@ -712,7 +712,15 @@ const App = () => {
                   <div style={{ textAlign: 'right', flexShrink: 0 }}>
                     <p style={{ fontWeight: '800', color: THEME.text, fontSize: '0.8rem', marginBottom: '0.0625rem', whiteSpace: 'nowrap' }}>{formatCurrency(bill.amount)}</p>
                     {isPaid ? (
-                      <span style={{ fontSize: '0.6rem', color: '#22c55e', fontWeight: '600' }}>Paid</span>
+                      <span style={{
+                        fontSize: '0.6rem',
+                        color: '#22c55e',
+                        fontWeight: '600',
+                        backgroundColor: 'transparent',
+                        border: 'none',
+                        padding: '0.125rem',
+                        display: 'inline-block'
+                      }}>Paid</span>
                     ) : (
                       <button
                         onClick={() => handleMarkPaid(bill)}
